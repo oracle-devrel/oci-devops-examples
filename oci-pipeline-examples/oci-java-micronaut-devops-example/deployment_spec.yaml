@@ -1,0 +1,44 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: ${namespace}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-micronaut-deployment
+  namespace: ${namespace}
+spec:
+  selector:
+    matchLabels:
+      app: java-micronaut
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: java-micronaut
+    spec:
+      containers:
+        - name: java-micronaut
+          # enter the path to your image, be sure to include the correct region prefix
+          image: us-ashburn-1.ocir.io/xxx/xxx/mr-devops/mr-devops-java-micronaut-example:${BUILDRUN_HASH}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-micronaut-service
+  namespace: ${namespace}
+  annotations: 
+    service.beta.kubernetes.io/oci-load-balancer-shape: "10Mbps"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: java-micronaut

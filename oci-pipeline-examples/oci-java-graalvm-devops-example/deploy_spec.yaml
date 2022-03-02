@@ -1,0 +1,44 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: ${namespace}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graal-polyglot-deployment
+  namespace: ${namespace}
+spec:
+  selector:
+    matchLabels:
+      app: graal-polyglot
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: graal-polyglot
+    spec:
+      containers:
+        - name: graal-polyglot
+          # enter the path to your image, be sure to include the correct region prefix
+          image: us-ashburn-1.ocir.io/xxx/xxx/mr-devops/mr-devops-graal-polyglot-app-repo:${BUILDRUN_HASH}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graal-polyglot-service
+  namespace: ${namespace}
+  annotations: 
+    service.beta.kubernetes.io/oci-load-balancer-shape: "10Mbps"
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: graal-polyglot
