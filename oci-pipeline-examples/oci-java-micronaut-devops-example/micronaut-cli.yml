@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: org.techwasti.mn
+---
+testFramework: junit
+sourceLanguage: java

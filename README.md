@@ -5,19 +5,51 @@
 ## THIS IS A NEW, BLANK REPO THAT IS NOT READY FOR USE YET.  PLEASE CHECK BACK SOON!
 
 ## Introduction
-MISSING
 
-## Getting Started
-MISSING
+Rapid delivery of software is essential for efficiently running your applications in the cloud. Oracle DevOps service provides a continuous integration and deployment (CI/CD) platform for developers. You can use the OCI DevOps service to easily build, test, and deploy software and applications on Oracle Cloud. DevOps build and deployment pipelines reduce change-driven errors and decrease the time customers spend on building and deploying releases.
 
-### Prerequisites
-MISSING
+The service also provides private Git repositories to store your code and it supports connections to external code repositories. Whether you're migrating workloads to Oracle Cloud Infrastructure (OCI)—from on-premises or other clouds—or developing new applications on OCI, you can use the DevOps service to simplify your software delivery lifecycle.
 
-## Notes/Issues
-MISSING
+## OCI Devops examples 
 
-## URLs
-* Nothing at this time
+-   [CICD with OCI Devops services - samples](./oci-pipeline-examples/README.md)         
+-   [OCI Devops Build service - samples](./oci-build-examples/README.md) 
+-   [OCI Devops Deployment service - samples](./oci-deployment-examples/README.md) 
+-   [OCI Source Code Management service - sample](./oci-coderepo-examples/README.md)
+
+## Instruction to clone a specific example.
+
+```
+    $ git init <foldername> 
+    $ cd <Foldername> 
+    $ git remote add origin <url to this git repo>
+    $ git config core.sparsecheckout true
+    $ echo "example path/*">>.git/info/sparse-checkout
+    $ git pull --depth=1 origin main
+```
+
+A sample to clone a build-sample with oci sonarqube integration.
+
+    $ git init oci_devops_sonarqube
+    $ cd oci_devops_sonarqube
+    $ git remote add origin <url to this git repo>
+    $ git config core.sparsecheckout true
+    $ echo "oci-build-examples/oci_buildrunner_with_sonarqube/*">>.git/info/sparse-checkout
+    $ git pull --depth=1 origin main
+    $ ls -ltr */*
+    $ ls -ltr */*
+            -rw-r--r--  1 rahulmr_in  staff   202 Feb 22 14:33 oci_buildrunner_with_sonarqube/Dockerfile
+            -rw-r--r--  1 rahulmr_in  staff  6313 Feb 22 14:33 oci_buildrunner_with_sonarqube/README.md
+            -rwxr-xr-x  1 rahulmr_in  staff    41 Feb 22 14:33 oci_buildrunner_with_sonarqube/build.sh
+            -rw-r--r--  1 rahulmr_in  staff  3204 Feb 22 14:33 oci_buildrunner_with_sonarqube/build_spec.yaml
+            -rw-r--r--  1 rahulmr_in  staff  1011 Feb 22 14:33 oci_buildrunner_with_sonarqube/deploy_spec.yaml
+            -rw-r--r--  1 rahulmr_in  staff    53 Feb 22 14:33 oci_buildrunner_with_sonarqube/package.json
+            -rwxr-xr-x  1 rahulmr_in  staff    77 Feb 22 14:33 oci_buildrunner_with_sonarqube/run.sh
+            -rw-r--r--  1 rahulmr_in  staff  2901 Feb 22 14:33 oci_buildrunner_with_sonarqube/server.js
+
+            oci_buildrunner_with_sonarqube/images:
+            total 3136
+            .....
 
 ## Contributing
 This project is open source.  Please submit your contributions by forking this repository and submitting a pull request!  Oracle appreciates any contributions that are made by the open source community.
