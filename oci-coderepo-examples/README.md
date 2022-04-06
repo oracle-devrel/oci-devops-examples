@@ -2,7 +2,7 @@ All about OCI devops coderepo samples ..
 =======
 
 <details>
-  <summary>To do</summary>
+  <summary>We will add the details in the next release</summary>
 
   </details>
 

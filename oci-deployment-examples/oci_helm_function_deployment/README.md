@@ -5,9 +5,9 @@ A sample illustration of helm based installation of OCI OKE,based on artifact up
 
 ℹ️   Summary of Interactions
 
-- Use OCI Service connector hub and invoke a function when there will be  repository artifiact upload event occurs.
+- Use OCI Service Connector Hub to invoke a function when there is a repository artifact upload event.
 
-- The Function will intern deploy the artifiact using helm to the OCI OKE.
+- The Function will  deploy the artifiact using helm to the OCI OKE.
 
 - The whole interaction is encompassed inside a private Virtual cloud network subnet.
 
@@ -179,9 +179,9 @@ $ fn deploy -v --app <FN APPLICATION NAME>
 
 - Add an additional query and put data.request.path attribute with * <OCID of REP> *
 
-- Add One more  additional filter ,select the Attribute as source and enter * sample-fastapi.zip * .Here we using a wildcard selection with a name ,which will be used as a target path while we will be uploading the helm artifacts to OCI artifacts repo. 
+- Add One more  additional filter ,select the Attribute as source and enter '*sample-fastapi.zip*' .Here we using a wildcard selection with a name ,which will be used as a target path while we will be uploading the helm artifacts to OCI artifacts repo. 
 
-![](images/sc_basic
+![](images/sc_basic.png)
 
 Or You may switch to Advance mode and paste the below query 
 
@@ -293,7 +293,7 @@ $ git clone https://github.com/RahulMR42/sample-python-app-with-helm-chart
 ```
 $ cd  sample-python-app-with-helm-chart
 $ docker login <dtr url> (Provide credentials when prompted)
-$ docker build -t <dockerurl/sample-python-app:<tag> .
+$ docker build -t <dockerurl/sample-python-app:<tag> . (EG: docker build -t <OCI Region>.ocir.io/<Namespace>/sample-python-app:1.0 .)
 $ docker push <dockerurl/sample-python-app:<tag>
 ```
 

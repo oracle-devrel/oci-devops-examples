@@ -2,6 +2,7 @@ Sample illustration of JAVA application with [Micronaut](https://micronaut.io/) 
 
 ------------
 
+Target Audience : Intermediate/Advanced towards OCI
 
 Objective 
 ---
@@ -38,6 +39,8 @@ Procedure
 - Create a OCI Connection with GITHUB using the PAT or move the code to OCI code repo. - https://docs.oracle.com/en-us/iaas/Content/devops/using/managing_coderepo.htm 
 
 - We need a code repo to build the managed build stage inside an OCI build pipeline.
+
+- You may change the  `gradle version` to latest by updating the values in the file [gradle.properties.](gradle.properties)
 
 - Add a managed build statge to the build pipeline. - 
 
@@ -83,7 +86,7 @@ https://docs.oracle.com/en-us/iaas/Content/devops/using/add_buildstage.htm#add_b
 ![](images/buildpview.png)
 
 
-- Do a test Run. 
+- Do a test Run via `Build pipeline` >`Manual Run`. 
 
 ![](images/buildtest.png)
 

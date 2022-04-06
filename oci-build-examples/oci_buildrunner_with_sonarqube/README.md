@@ -141,7 +141,7 @@ EXEC: INFO: ------------- Check Quality Gate status
 2022-02-21T12:05:35.387Z
 EXEC: INFO: Waiting for the analysis report to be processed (max 300s)   
 2022-02-21T12:05:40.440Z
-EXEC: INFO: QUALITY GATE STATUS: PASSED - View details on http://129.153.5.206:9000/dashboard?id=oci_build_sonar   
+EXEC: INFO: QUALITY GATE STATUS: PASSED - View details on http://X.Y.Z.A:9000/dashboard?id=oci_build_sonar   
 2022-02-21T12:05:45.762Z
 EXEC: INFO: Analysis total time: 20.561 s   
 2022-02-21T12:05:45.765Z
@@ -181,7 +181,7 @@ A specific note
 
 ----
 
-Its a demo and focused only on `OCI Devops Build services` and `Sonarqube` .The whole pipeline can be reffered here . - https://github.com/RahulMR42/oci-devops-cicd-with-java-graalvm-example. 
+Its a demo and focused only on `OCI Devops Build services` and `Sonarqube` .The whole pipeline can be referred here . - https://github.com/RahulMR42/oci-devops-cicd-with-java-graalvm-example. 
 
 References & Credits for base code
 ============
@@ -198,7 +198,7 @@ Contributors
 ===========
 
 - Author : Rahul M R.
-- Colloboroators : NA
+- Collaborators : NA
 - Last release : Feb 2022
 
 ### Back to examples.
