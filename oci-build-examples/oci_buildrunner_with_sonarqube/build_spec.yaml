@@ -1,0 +1,93 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    graal_vm_version: "21.3.0"
+    sonar_cli_version: "4.6.2.2472"
+    sonar_project: "oci_build_sonar"
+    sonar_quality_wait: "true"
+
+
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+  vaultVariables:
+    sonar_token: "ocid1.vaultsecret.oc1.iad.xxxx"
+    sonar_url: "ocid1.vaultsecret.oc1.iad.xxxx"
+  
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Define unique image tag"
+    timeoutInSeconds: 40
+    command: |
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Build the app"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      ls -ltr 
+      java -version
+      wget -q https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${graal_vm_version}/graalvm-ce-java17-linux-amd64-${graal_vm_version}.tar.gz 1>/dev/null 2>/dev/null
+      tar zxf graalvm-ce-java17-linux-amd64-${graal_vm_version}.tar.gz
+      export java_graal_home=./graalvm-ce-java17-${graal_vm_version}/bin/
+      ${java_graal_home}/gu list
+      ls -ltr 
+      ./build.sh 
+       ls -ltr 
+    
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Sonar Quality Check"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${sonar_cli_version}-linux.zip 1>/dev/null 2>/dev/null
+      unzip sonar-scanner-cli-${sonar_cli_version}-linux.zip 1>/dev/null
+      PATH=$PATH:"sonar-scanner-${sonar_cli_version}-linux/bin"
+      sonar-scanner \
+          -Dsonar.projectKey=${sonar_project} \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=${sonar_url} \
+          -Dsonar.login=${sonar_token} \
+          -Dsonar.qualitygate.wait=${sonar_quality_wait}
+    
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+      
+
+  - type: Command
+    timeoutInSeconds: 1200
+    name: "Build container image"
+    command: |
+      cd ${OCI_WORKSPACE_DIR}/${code_repo_name}
+      docker build --pull --rm -t graal_polyglot_sample_app .      
+     
+outputArtifacts:
+  - name: graal_polyglot_docker_image
+    type: DOCKER_IMAGE
+    # this location tag doesn't effect the tag used to deliver the container image
+    # to the OCI Container Registry
+    location: graal_polyglot_sample_pp:latest
