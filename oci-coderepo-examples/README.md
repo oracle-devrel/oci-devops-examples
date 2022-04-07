@@ -2,9 +2,19 @@ All about OCI devops coderepo samples ..
 =======
 
 <details>
-  <summary>We will add the details in the next release</summary>
+  <summary>Integration with external code repos. - click to expand</summary>
 
-  </details>
+* [Integrate GITHUB.com repo with OCI Devops .](./oci-devops-coderepo-with-github/)
+* [Integrate GITLAB.com repo with OCI Devops .](./oci-devops-coderepo-with-gitlab/)
+
+</details>
+
+
+
+### Back to examples.
+----
+
+- 🏝️ [Back to OCI Devops sample](../README.md)
 
 
 ### Back to examples.
