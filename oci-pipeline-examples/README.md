@@ -8,6 +8,12 @@ All about devops pipelines using OCI Devops.
 * [Build and run a OCI devops pipeline with JAVA and Graal VM framework.](./oci-java-graalvm-devops-example/)
 
 </details>
+<details>
+  <summary>Cascaded Pipelines - click to expand</summary>
+  
+* [Cascaded Pipelines](./oci-cascaded-pipelines/sa)
+
+</details>
 
 
 ### Back to examples.
