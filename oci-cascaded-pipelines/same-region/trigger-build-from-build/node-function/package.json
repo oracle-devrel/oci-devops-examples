@@ -4,7 +4,6 @@
 	"description": "example function",
 	"main": "func.js",
 	"author": "",
-	"license": "Apache-2.0",
 	"dependencies": {
 		"@fnproject/fdk": ">=0.0.34",
 		"oci-common": "^2.21.0",
