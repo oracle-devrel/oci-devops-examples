@@ -21,7 +21,6 @@ Please delete options that are not relevant.
 - [ ] Free Tier
 - [ ] Always Free
 - [ ] Paid 
-- [ ] Oracle internal tenancies/BOAT Users
 
 
 # Checklist:

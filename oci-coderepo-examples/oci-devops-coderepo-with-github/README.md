@@ -9,7 +9,7 @@ A sample illustration of [Github](https://github.com/) code repo integration wit
 - Create vault ,policies as accordingly.
 - Create a devops connection and integrate with OCI.
 - Test and validate the integrations.
-a
+
 * Specific instruction to clone only this example.
 
     ```

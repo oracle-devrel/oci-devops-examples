@@ -16,9 +16,3 @@ All about OCI devops coderepo samples ..
 
 - 🏝️ [Back to OCI Devops sample](../README.md)
 
-
-### Back to examples.
-----
-
-- 🏝️ [Back to OCI Devops sample](../README.md)
-
