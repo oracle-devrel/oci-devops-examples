@@ -1,0 +1,7 @@
+schema_version: 20180708
+name: trigger-deploy-pipeline-from-deploy-pipeline
+version: 0.0.19
+runtime: node
+build_image: fnproject/node:14-dev
+run_image: fnproject/node:14
+entrypoint: node func.js
