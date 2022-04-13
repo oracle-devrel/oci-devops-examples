@@ -37,6 +37,7 @@ Deploy the function with below command.
 ```
 $ fn -v deploy --app <app-name>
 ```
+Note: Refer https://docs.oracle.com/en-us/iaas/Content/Functions/Tasks/functionscreatingapps.htm for creating new application.
 
 #### 2. Configure Service Connector Hub
 **Step 1:**
