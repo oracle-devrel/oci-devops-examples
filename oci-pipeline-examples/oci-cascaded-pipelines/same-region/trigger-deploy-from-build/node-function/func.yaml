@@ -1,0 +1,10 @@
+schema_version: 20180708
+name: trigger-deploy-pipeline-from-build-pipeline
+version: 0.0.11
+runtime: node
+build_image: fnproject/node:14-dev
+run_image: fnproject/node:14
+entrypoint: node func.js
+config:
+  deploy_pipeline_id: "<DEPLOY-PIPELINE-OCID>"
+  display_name_prefix_for_new_run: "AutoTriggeredCascade2_"
