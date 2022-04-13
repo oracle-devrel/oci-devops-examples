@@ -9,8 +9,8 @@
 **Step 1:**
 Clone the repository code.
 ```
-$ git init oci-devops-coderepo-with-gitlab
-$ cd oci-devops-coderepo-with-gitlab
+$ git init cascaded-pipelines
+$ cd cascaded-pipelines
 $ git remote add origin https://github.com/oracle-devrel/oci-devops-examples
 $ git config core.sparsecheckout true
 $ echo "oci-pipeline-examples/oci-cascaded-pipelines/same-region/trigger-deploy-from-build/*">>.git/info/sparse-checkout
