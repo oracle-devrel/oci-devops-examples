@@ -9,21 +9,27 @@
 **Step 1:**
 Clone the repository code.
 ```
-$ git clone https://github.com/oracle-cloud-infra/oci-devops-cascaded-pipelines.git
+$ git init oci-devops-coderepo-with-gitlab
+$ cd oci-devops-coderepo-with-gitlab
+$ git remote add origin https://github.com/oracle-devrel/oci-devops-examples
+$ git config core.sparsecheckout true
+$ echo "oci-pipeline-examples/oci-cascaded-pipelines/same-region/trigger-build-from-build/*">>.git/info/sparse-checkout
+$ git pull --depth=1 origin main
 ```
 
 **Step 2:**
 Change to function directory.
 ```
-$ cd oci-devops-cascaded-pipelines/same-region/trigger-build-from-build/node-function
+$ cd node-function
 ```
 
 **Step 3:**
-In `func.js`, update `buildPipelineId` and `displayNamePrefixForNewRun` with appropriate values as below.
+In `func.yaml`, update `build_pipeline_id` and `display_name_prefix_for_new_run` with appropriate values as below.
 
 ```
-const buildPipelineId = "<target-build-pipeline-ocid>"
-const displayNamePrefixForNewRun = "AutoTriggeredCascadedPipeline_";
+config:
+  build_pipeline_id: "<BUILD-PIPELINE-OCID>"
+  display_name_prefix_for_new_run: "AutoTriggeredCascade2_"
 ```
 
 **Step 4:**

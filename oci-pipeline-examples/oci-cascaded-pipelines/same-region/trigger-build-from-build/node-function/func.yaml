@@ -5,3 +5,6 @@ runtime: node
 build_image: fnproject/node:14-dev
 run_image: fnproject/node:14
 entrypoint: node func.js
+config:
+  build_pipeline_id: "<BUILD-PIPELINE-OCID>"
+  display_name_prefix_for_new_run: "AutoTriggeredCascade2_"

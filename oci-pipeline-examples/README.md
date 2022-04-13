@@ -11,7 +11,7 @@ All about devops pipelines using OCI Devops.
 <details>
   <summary>Cascaded Pipelines - click to expand</summary>
   
-* [Cascaded Pipelines](./oci-cascaded-pipelines)
+* [Cascaded Pipelines - With in the Region](./oci-cascaded-pipelines/same-region/)
 
 </details>
 
