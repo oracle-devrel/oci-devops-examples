@@ -181,3 +181,17 @@ ALL {resource.type = 'ApiGateway', resource.compartment.id = 'ocid1.compartment.
 - Devops policies - OCI Documentation - [link](https://docs.oracle.com/en-us/iaas/Content/devops/using/devops_iampolicies.htm#devops_iam_policies) 
 
 - Fine grained access to a specific component and actions - [link](https://docs.oracle.com/en-us/iaas/Content/devops/using/devops_iampolicies.htm#policy-details)
+
+
+Contributors 
+===========
+
+- Author : Rahul M R.
+- Collaborators : NA
+- Last release : Apr 2022
+
+### Back to examples.
+----
+
+- 🍿 [Back to OCI Devops Config sample](./../README.md)
+- 🏝️ [Back to OCI Devops sample](./../../README.md)
