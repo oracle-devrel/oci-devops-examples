@@ -6,7 +6,7 @@ Sample illustrations of `dynamic groups` and `policies` requirements for `OCI De
 
 - All these samples are written with a sample dynamic groups,please change accordingly. 
 - All the policies are using verbs * manage or use * which are powerfull , you may alter with other verbs( read,inspect) as accordingly.
-- Use the [References](https://github.com/RahulMR42/oci-devops-policies-groups#references) section to read more about fine grain controls. 
+- Use the [References](https://github.com/oracle-devrel/oci-devops-examples/oci-config-examples/oci-devops-policies-groups#-references) section to read more about fine grain controls. 
 
 
 * Specific instruction to clone only this example.
@@ -28,7 +28,7 @@ Sample illustrations of `dynamic groups` and `policies` requirements for `OCI De
 <details>
 <summary>Devops Pipeline (OCI Repo + Build + Deploy) - Click to expand</summary>
 
--  Create  relevenat users and all the devops users to the user group (One group is minimum).
+-  Create  relevant users and all the devops users to the user group (One group is minimum).
 -  You may use `Administrator` group for devops ,however better to create a specific user group to have better control.
 - For further controls ,you may create different user groups like `devops-admins`,`devops-users`,`devops-validators` etc.
 - Documentation
@@ -91,8 +91,7 @@ ALL {resource.type = 'devopsconnection', resource.compartment.id = 'compartmentO
 - Create a dynamic group (Eg: dg-compartmentname-functions) to group all the instances with below rule.
 
 ```
-resource.type = 'fnfunc'
-resource.compartment.id = 'ocid1.compartment.oc1..xx'
+ALL {resource.type = 'fnfunc', resource.compartment.id = 'compartmentOCID'}
 ```
 
 </details>
