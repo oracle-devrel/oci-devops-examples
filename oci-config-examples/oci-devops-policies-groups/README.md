@@ -21,7 +21,7 @@ Sample illustrations of `dynamic groups` and `policies` requirements for `OCI De
 
     ```
 
-<!-- All about user groups -->
+<!-- All about user groups  -->
 
 ### ✔️ User Groups
 
