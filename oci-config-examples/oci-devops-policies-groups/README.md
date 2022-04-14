@@ -24,6 +24,7 @@ Sample illustrations of `dynamic groups` and `policies` requirements for `OCI De
 <!-- All about user groups -->
 
 ### ✔️ User Groups
+
 <details>
 <summary>Devops Pipeline (OCI Repo + Build + Deploy) - Click to expand</summary>
 
