@@ -5,6 +5,7 @@ All about OCI devops deployment samples ..
   <summary>Policies & Groups - click to expand</summary>
   
 * [Devops related policies and groups](./oci-devops-policies-groups/)
+* [OCI Policy management using terraform](./oci_devops_policy_dg_terraform/)
 
 </details>
 
