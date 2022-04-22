@@ -45,12 +45,12 @@ ALL {resource.type = 'devopsrepository', resource.compartment.id = 'ocid1.compar
 - Create a policy with below statements.
 
 ```
-Allow dynamic-group "<DG Name>" to manage repos in c"<Compartment Name>"    
-Allow dynamic-group "<DG Name>" to read secret-family in c"<Compartment Name>"  
-Allow dynamic-group "<DG Name>" to manage devops-family in c"<Compartment Name>"    
-Allow dynamic-group "<DG Name>" to manage generic-artifacts in c"<Compartment Name>"    
-Allow dynamic-group "<DG Name>" to use ons-topics in c"<Compartment Name>"  
-Allow dynamic-group "<DG Name>" to read secret-family in c"<Compartment Name>"
+Allow dynamic-group "<DG Name>" to manage repos in compartment "<Compartment Name>"    
+Allow dynamic-group "<DG Name>" to read secret-family in compartment "<Compartment Name>"  
+Allow dynamic-group "<DG Name>" to manage devops-family in compartment "<Compartment Name>"    
+Allow dynamic-group "<DG Name>" to manage generic-artifacts in compartment "<Compartment Name>"    
+Allow dynamic-group "<DG Name>" to use ons-topics in compartment "<Compartment Name>"  
+Allow dynamic-group "<DG Name>" to read secret-family in compartment "<Compartment Name>"
 ```
 
 - Create a devops project - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_project.htm#create_a_project 
@@ -145,7 +145,7 @@ $ Edit remote-backend_template.tf and update the endpoint.
 
 ![](images/oci_coderepo.png)
 
-- Let us do a build manual invokation.
+- Let us do a manual build run.
 
 ![](images/oci_build_run_1.png)
 

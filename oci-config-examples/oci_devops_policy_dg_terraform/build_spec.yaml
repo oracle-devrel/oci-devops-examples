@@ -11,8 +11,8 @@ env:
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
   vaultVariables:
-    aws_access_key_id: ocid1.vaultsecret.oc1.iad.amaaaaaak56z2vqaqsdelia6iiagjmtuok43w7ipklqwahwbwqvye52n74va
-    aws_secret_access_key: ocid1.vaultsecret.oc1.iad.amaaaaaak56z2vqa6vmu7h3ud3thzm7emsdb7fptb7zqmise2qlhx7xtehza
+    aws_access_key_id: ocid1.vaultsecret.oc1.iad.xxxx
+    aws_secret_access_key: ocid1.vaultsecret.oc1.iad.yyyy
     
  
 
