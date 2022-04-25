@@ -1,0 +1,82 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    region: "us-ashburn-1" # Set your OCI Region.
+
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+  vaultVariables:
+    aws_access_key_id: ocid1.vaultsecret.oc1.iad.xxxx
+    aws_secret_access_key: ocid1.vaultsecret.oc1.iad.yyyy
+    
+ 
+
+steps:
+  - type: Command
+    name: "Install Terraform"
+    timeoutInSeconds: 400
+    command: |
+      yum install -y yum-utils
+      yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+      yum -y install terraform
+
+
+  - type: Command
+    name: "TENANCY - Terraform actions"
+    timeoutInSeconds: 400
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}/terraform
+      for cname in `cat ${OCI_PRIMARY_SOURCE_DIR}/compartments.config|sort -u -k 1|cut -d = -f 1`
+      do
+      echo "Acting on ROOT Tenancy for Compartment - ${cname}.."
+      mkdir ${cname}
+      cp -r tenancy_scope/* ${cname}/
+      cd ${cname}
+      export compartment_name=${cname}
+      echo "[default]" > cred_store
+      echo "aws_access_key_id=${aws_access_key_id}">>cred_store
+      echo "aws_secret_access_key=${aws_secret_access_key}">>cred_store
+      cat remote-backend_template.tf|envsubst > remote-backend.tf
+      rm remote-backend_template.tf
+      export TF_VAR_compartment_name=${cname}
+      export TF_VAR_compartment_ocid=`cat ${OCI_PRIMARY_SOURCE_DIR}/compartments.config|grep ${cname}|cut -f 2 -d '='`
+      terraform version
+      terraform init -migrate-state
+      terraform plan -out plan.out
+      export TF_LOG=debug
+      terraform apply plan.out
+      cd ..
+      rm -r ${cname}
+      done
+
+  - type: Command
+    name: "COMPARTMENT - Terraform actions"
+    timeoutInSeconds: 400
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}/terraform
+      for cname in `cat ${OCI_PRIMARY_SOURCE_DIR}/compartments.config|sort -u -k 1|cut -d = -f 1`
+      do
+      echo "Acting directly on Compartment - ${cname}.."
+      mkdir ${cname}
+      cp -r compartment_scope/* ${cname}/
+      cd ${cname}
+      export compartment_name=${cname}
+      echo "[default]" > cred_store
+      echo "aws_access_key_id=${aws_access_key_id}">>cred_store
+      echo "aws_secret_access_key=${aws_secret_access_key}">>cred_store
+      cat remote-backend_template.tf|envsubst > remote-backend.tf
+      rm remote-backend_template.tf
+      export TF_VAR_compartment_name=${cname}
+      export TF_VAR_compartment_ocid=`cat ${OCI_PRIMARY_SOURCE_DIR}/compartments.config|grep ${cname}|cut -f 2 -d '='`
+      terraform version
+      terraform init -migrate-state
+      terraform plan -out plan.out
+      terraform apply plan.out
+      cd ..
+      rm -r ${cname}
+      done
