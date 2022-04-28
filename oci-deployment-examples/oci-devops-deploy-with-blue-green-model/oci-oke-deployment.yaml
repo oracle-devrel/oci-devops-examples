@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-oke-bg-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: sample-oke-bg-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: sample-oke-bg-app
+    spec:
+      containers:
+        - name: sample-oke-bg-app
+          # enter the path to your image, be sure to include the correct region prefix
+          image: us-ashburn-1.ocir.io/fahdabidiroottenancy/rahul/mr-devops/mr-devops-oke-bg-sample:${BUILDRUN_HASH}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command:
+              - cat
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-oke-bg-app-service
+  annotations: 
+    service.beta.kubernetes.io/oci-load-balancer-shape: "10Mbps"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: sample-oke-bg-app
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sample-oke-bg-app-ing
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  # tls:
+  # - secretName: tls-secret
+  rules:
+  - http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: sample-oke-bg-app-service
+              port:
+                number: 8080
