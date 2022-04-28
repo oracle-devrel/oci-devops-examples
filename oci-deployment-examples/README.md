@@ -24,7 +24,6 @@ All about OCI devops deployment samples ..
 
 </details>
 
-
 ### Back to examples.
 ----
 
