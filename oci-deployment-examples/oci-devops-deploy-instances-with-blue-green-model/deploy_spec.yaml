@@ -1,0 +1,34 @@
+version: 1.0
+component: deployment
+env:
+  variables:
+    version: ${appVersion}
+files:
+  # This section is to define how the files in the artifact shall 
+  # be put on the compute instance
+  - source: /
+    destination: /tmp/
+steps:
+  # This section is to define the scripts that each step shall run on the instance after file copy.
+  - stepType: Command
+    name: Setup ENV
+    command: |
+       sudo yum install httpd -y
+       sudo apachectl start
+       sudo systemctl enable httpd
+       sudo firewall-cmd --permanent --zone=public --add-service=http
+       sudo firewall-cmd --reload
+    timeoutInSeconds: 600
+
+  - stepType: Command
+    name: Install Apache Web Server
+    command: |
+      hname=`hostname`
+      bg_color="GREEN"
+      if [[ ${hname} == blue* ]]; then
+          bg_color="BLUE"
+      fi
+      sudo truncate -s 0 /var/www/html/index.html
+      sudo chmod 766 /var/www/html/index.html
+      echo "<body><b>With Love from OCI Devops(Version:${APP_VERSION}) ,Served via environment:<font color=$bg_color>$bg_color</font></body>" > /var/www/html/index.html
+    timeoutInSeconds: 600
