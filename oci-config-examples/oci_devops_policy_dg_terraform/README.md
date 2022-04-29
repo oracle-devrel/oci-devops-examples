@@ -175,6 +175,7 @@ Read more
 - OCI Devops - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm.
 - OCI Reference architectures  -  https://docs.oracle.com/solutions/
 - OCI Devops samples - https://github.com/oracle-devrel/oci-devops-examples 
+- Terraform Refresh - https://www.terraform.io/cli/commands/refresh
 
 
 Contributors 
