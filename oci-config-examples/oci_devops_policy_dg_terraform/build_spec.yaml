@@ -48,7 +48,7 @@ steps:
       terraform version
       terraform init -migrate-state
       terraform plan -out plan.out
-      export TF_LOG=debug
+      terraform refresh
       terraform apply plan.out
       cd ..
       rm -r ${cname}
@@ -76,6 +76,7 @@ steps:
       terraform version
       terraform init -migrate-state
       terraform plan -out plan.out
+      terraform refresh
       terraform apply plan.out
       cd ..
       rm -r ${cname}
