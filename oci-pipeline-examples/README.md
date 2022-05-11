@@ -15,6 +15,24 @@ All about devops pipelines using OCI Devops.
 
 </details>
 
+</details>
+<details>
+  <summary>RUST Applications - click to expand</summary>
+
+* [Build and Deploy a RUST application using OCI Devops](./oci-devops-cicd-rust-sample/)
+
+</details>
+
+
+</details>
+<details>
+  <summary>Golan Applications - click to expand</summary>
+
+* [Build and Deploy a Golan application using OCI Devops](./oci-devops-golan-sample/)
+
+</details>
+
+
 
 ### Back to examples.
 ----
