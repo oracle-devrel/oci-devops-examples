@@ -243,6 +243,10 @@ kubectl get svc -n ingress-nginx
 kubectl create ns nscanaryprd;kubectl create ns  nscanarystage;
 ```
 
+Let's Test
+-------
+
+
 - Go back to build pipeline and do click `Start manual run`.
 
 ![](images/oci-build-run-1.png)

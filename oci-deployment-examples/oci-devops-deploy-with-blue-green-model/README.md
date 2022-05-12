@@ -290,6 +290,11 @@ def read_root():
     return {"Message": "with Love from OCI Devops ","Version":version,"Namespace":namespace}
 ```
 
+
+Let's Test
+-------
+
+
 - Go back to build pipeline and do click `Start manual run`.
 
 ![](images/oci-build-run-1.png)
