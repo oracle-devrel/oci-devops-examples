@@ -349,6 +349,9 @@ freeformTags.key = 'environment' && freeformTags.value = 'green'
 
 ![](images/oci-build-trigger-deploy-2.png)
 
+Let's Test
+-------
+
 - Go back to build pipeline and do click `Start manual run`.
 
 ![](images/oci-build-run-1.png)
