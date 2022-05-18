@@ -1,0 +1,62 @@
+version: 0.1
+component: build
+timeoutInSeconds: 1000
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    BUILD_CACHE_OS_BUCKET_NAME: build-cache
+    BUILD_CACHE_OS_FILE_NAME: cache.zip
+
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Define unique image tag"
+    timeoutInSeconds: 140
+    command: |
+      echo "OCI_BUILD_RUN_ID: ${OCI_BUILD_RUN_ID}"
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+  - type: Command
+    name: "Docker BuildKit Setup"
+    timeoutInSeconds: 140
+    command: |
+      wget https://github.com/docker/buildx/releases/download/v0.8.2/buildx-v0.8.2.linux-amd64 -O docker-buildx
+      mkdir -p ~/.docker/cli-plugins
+      mv docker-buildx ~/.docker/cli-plugins/
+      chmod +x ~/.docker/cli-plugins/docker-buildx
+      docker buildx install
+  - type: Command
+    name: "Build Cache Restore"
+    timeoutInSeconds: 140
+    command: |
+      oci os object get --bucket-name build-cache --file ${BUILD_CACHE_OS_FILE_NAME} --name ${BUILD_CACHE_OS_FILE_NAME} && unzip ${BUILD_CACHE_OS_FILE_NAME}
+      echo "Done..."
+  - type: Command
+    name: "Docker build"
+    command: |
+      export DOCKER_BUILDKIT=1
+      export DOCKER_CLI_EXPERIMENTAL=enabled
+      docker buildx create --use
+      docker buildx build -t="hello-world-java" --cache-from=type=local,src=./cache --cache-to=type=local,dest=./cache --load .
+      echo "DONE"
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          build_result=FAILURE
+          echo "Failure successfully handled"
+  - type: Command
+    name: "Build Cache Upload"
+    timeoutInSeconds: 140
+    command: |
+      rm ${BUILD_CACHE_OS_FILE_NAME} && zip -r ${BUILD_CACHE_OS_FILE_NAME} cache/*
+      oci os object put --bucket-name build-cache --file ${BUILD_CACHE_OS_FILE_NAME} --force
+outputArtifacts:
+  - name: Build_output_image
+    type: DOCKER_IMAGE
+    location: "hello-world-java"
