@@ -10,6 +10,7 @@ For this, sample java maven-based application is used to demonstrate build cachi
 * Assumed you are already familiar with OCI DevOps. Please refer [Documentation](https://www.oracle.com/devops/devops-service/)
 * To know how to run the this maven project in your local. Please refer [this](./SETUP-PROJECT.md)
 * Assumed that you are using docker build inside your `build_spec.yaml`
+* As OCI Object storage is used to store the cache, Please create a bucket and set right access policies for the same. [Click here](https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm) to know more about Object Storage.
 
 ### Overview of Changes
 For any project, you may tweek `build_spec.yaml` to enable build cache.
