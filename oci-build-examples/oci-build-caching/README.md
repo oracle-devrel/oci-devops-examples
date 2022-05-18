@@ -1,6 +1,6 @@
 # OCI DevOps - Speed up builds with caching
 
-Most of the time the build time is consumed in downloading or preparing certain build dependancies like maven dependencies, node_modules, pip dependancies, etc... This document talks about on how to reduce time by caching those dependencies for the subsequent runs. 
+In most cases, the build time is consumed in downloading or preparing certain build dependancies like maven dependencies, node_modules, pip dependancies, etc... This procedure talks about on how to reduce time by caching those dependencies for the subsequent runs. 
 
 In this way, the first run would take full time to download and setup build dependancies. But the subsequent runs will be more efficient through the cache.
 

@@ -14,8 +14,6 @@ RUN --mount=type=cache,target=/root/.m2 mvn package
 
 FROM openjdk
 
-#maintainer 
-MAINTAINER dstar55@yahoo.com
 #expose port 8080
 EXPOSE 8080
 

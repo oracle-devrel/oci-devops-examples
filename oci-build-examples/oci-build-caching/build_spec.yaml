@@ -7,6 +7,7 @@ env:
   variables:
     BUILD_CACHE_OS_BUCKET_NAME: build-cache
     BUILD_CACHE_OS_FILE_NAME: cache.zip
+    BUILDX_VERSION: 0.8.2
 
   # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
   # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
@@ -25,7 +26,7 @@ steps:
     name: "Docker BuildKit Setup"
     timeoutInSeconds: 140
     command: |
-      wget https://github.com/docker/buildx/releases/download/v0.8.2/buildx-v0.8.2.linux-amd64 -O docker-buildx
+      wget https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-amd64 -O docker-buildx
       mkdir -p ~/.docker/cli-plugins
       mv docker-buildx ~/.docker/cli-plugins/
       chmod +x ~/.docker/cli-plugins/docker-buildx
