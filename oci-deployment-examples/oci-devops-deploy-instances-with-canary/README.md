@@ -87,7 +87,7 @@ If you are using a code repo other than `OCI code repo` ,ensure to set an extern
 
 ```
 outputArtifacts:
-  - name: instace_deploy_manifest
+  - name: instance_deploy_manifest
     type: BINARY
     # this location tag doesn't effect the tag used to deliver the container image
     # to the Container Registry
