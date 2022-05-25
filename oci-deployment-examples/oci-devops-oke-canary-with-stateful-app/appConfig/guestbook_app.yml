@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guestbook
+  template:
+    metadata:
+      labels:
+        app: guestbook
+    spec:
+      containers:
+        - image: us-ashburn-1.ocir.io/fahdabidiroottenancy/mr-guestbook:${version}
+          name: guestbook
+          env:
+            - name: REDIS_HOST
+              value: ${redis_host}
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: guestbook
+spec:
+  type: ClusterIP
+  ports:
+    - name: guestbook
+      port: 8080
+  selector:
+    app: guestbook
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: poc-ing
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: guestbook
+                port:
+                  number: 8080
