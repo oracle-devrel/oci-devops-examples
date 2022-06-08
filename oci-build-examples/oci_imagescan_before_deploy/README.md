@@ -4,7 +4,6 @@ A sample illustration of build with a container image vulnerability validation,b
 ![](images/global_view.png)
 
 Objective
-
 ---
 
 - Create an OCI devops build pipeline to build a container image for OKEdeployment.
