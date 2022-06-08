@@ -6,31 +6,31 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: graal-polyglot-deployment
+  name: sample-fastapi-app-deployment
   namespace: ${namespace}
 spec:
   selector:
     matchLabels:
-      app: graal-polyglot
+      app: sample-fastapi-app
   replicas: 3
   template:
     metadata:
       labels:
-        app: graal-polyglot
+        app: sample-fastapi-app
     spec:
       containers:
-        - name: graal-polyglot
+        - name: sample-fastapi-app
           # enter the path to your image, be sure to include the correct region prefix
-          image: <OCI Region>-1.ocir.io/namespace/xxx/xx:${BUILDRUN_HASH}
+          image: <CONTAINER REPO>:${BUILDRUN_HASH}
           imagePullPolicy: Always
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
               protocol: TCP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: graal-polyglot-service
+  name: sample-fastapi-app-service
   namespace: ${namespace}
   annotations: 
     service.beta.kubernetes.io/oci-load-balancer-shape: "10Mbps"
@@ -39,6 +39,6 @@ spec:
   ports:
     - port: 80
       protocol: TCP
-      targetPort: 3000
+      targetPort: 8080
   selector:
-    app: graal-polyglot
+    app: sample-fastapi-app

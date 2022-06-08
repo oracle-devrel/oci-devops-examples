@@ -1,0 +1,35 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    key: "value"
+
+steps:
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Check the Scan status"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      scanstatus=`oci vulnerability-scanning container scan result list --compartment-id ${COMPARTMENT_ID} --repository ${REPO_NAME} --image ${BUILDRUN_HASH}|grep 'highest-problem-severity'|cut -f 2 -d ':'|xargs|cut -f 1 -d ','`
+
+      if [[ ${scanstatus} != "${SCAN_CHECK_BASELINE}" ]]
+      then
+      echo "Found the image as vulnerable"
+      oci vulnerability-scanning container scan result list --compartment-id ${COMPARTMENT_ID} --repository ${REPO_NAME} --image ${BUILDRUN_HASH}
+      exit 1
+      fi
+
+      echo "Found the image as secure and clean"
+      oci vulnerability-scanning container scan result list --compartment-id ${COMPARTMENT_ID} --repository ${REPO_NAME} --image ${BUILDRUN_HASH}
+    
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
