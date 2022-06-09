@@ -5,6 +5,7 @@ All about OCI devops build samples ..
   <summary>Security & Quality - click to expand</summary>
 
 * [Integrate sonarqube with OCI devops build runner.](./oci_buildrunner_with_sonarqube/)
+* [Container image scanning  before deploy.](./oci_imagescan_before_deploy/)
 
 </details>
 
