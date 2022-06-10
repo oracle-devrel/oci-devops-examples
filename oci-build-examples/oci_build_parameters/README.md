@@ -22,7 +22,7 @@ OCI_TRIGGER_SOURCE_URL|Repository URL that triggered the build|
 OCI_TRIGGER_EVENT_TYPE|Trigger that started the event.|
 OCI_PRIMARY_SOURCE_DIR|Default working directory of the build (primary source working directory).|
 OCI_WORKSPACE_DIR|Working directory value. Contains /workspace as the default value.|
-${OCI_WORKSPACE_DIR}/<source-name>|Build source directory path."source-name" is the name of the build source given by the user while creating the Build stage.|
+${OCI_WORKSPACE_DIR}/ "source-name"|Build source directory path."source-name" is the name of the build source given by the user while creating the Build stage.|
 OCI_BUILD_STAGE_NAME|Build stage name.|
 OCI_PRIMARY_SOURCE_NAME|Primary build source name.|
 OCI_PRIMARY_SOURCE_COMMIT_HASH|Primary build source commit hash used in the current build run.|
