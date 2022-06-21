@@ -4,11 +4,11 @@ All about OCI devops coderepo samples ..
 <details>
   <summary>Integration with external code repos. - click to expand</summary>
 
+* [Integrate Bitbucket.org repo with OCI Devops .](./oci-devops-coderepo-with-bitbucketcloud/)
 * [Integrate GITHUB.com repo with OCI Devops .](./oci-devops-coderepo-with-github/)
 * [Integrate GITLAB.com repo with OCI Devops .](./oci-devops-coderepo-with-gitlab/)
 
 </details>
-
 
 
 ### Back to examples.
