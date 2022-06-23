@@ -1,0 +1,39 @@
+version: 0.1
+component: build
+timeoutInSeconds: 1000
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    # To export variables/
+
+steps:
+  - type: VulnerabilityAudit
+    name: "Vulnerability Audit Step"
+    configuration:
+      buildType: maven
+      pomFilePath: ${OCI_PRIMARY_SOURCE_DIR}/pom.xml
+      maxPermissibleCvssV2Score: 6.0
+      maxPermissibleCvssV3Score: 7.0
+    knowledgeBaseId: ${KB_OCID}
+    vulnerabilityAuditCompartmentId: ${VA_COMPARTMENT_OCID}
+    vulnerabilityAuditName: build_sample_${OCI_PRIMARY_SOURCE_SOURCE_BRANCH_NAME}
+  - type: Command
+    name: "Docker build"
+    command: |
+      docker  build -t "hello-world-java" .
+      echo "DONE"
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          build_result=FAILURE
+          echo "Failure successfully handled"
+# outputArtifacts:
+#  - name: Build_output_image
+#    type: DOCKER_IMAGE
+#    location: "hello-world-java"
