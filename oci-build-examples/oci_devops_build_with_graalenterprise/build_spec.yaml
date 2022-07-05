@@ -1,0 +1,44 @@
+version: 0.1
+component: build
+timeoutInSeconds: 600
+runAs: root
+shell: bash
+env:
+  exportedVariables:
+    - BUILDRUN_HASH
+  variables:
+    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm22-ee-java17"
+    # PATH is a reserved variable and cannot be defined as a variable.
+    # However, PATH can be changed in a build step and the change is visible in subsequent steps.
+steps:
+  - type: Command
+    name: "Define unique  tag"
+    timeoutInSeconds: 40
+    command: |
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+
+  - type: Command
+    name: "Install- GraalVM 2.2 with Native Image (Java17)"
+    command: |
+      yum -y install graalvm22-ee-17-native-image
+  - type: Command
+    name: "Set PATH Variable"
+    command: |
+      export PATH=$JAVA_HOME/bin:$PATH
+  # - type: Command
+  #   name: "Build a Jar"
+  #   command: |
+  #     mvn --no-transfer-progress clean package
+  - type: Command
+    name: "Build a native executable "
+    command: |
+      mvn --no-transfer-progress -Pnative -DskipTests package
+
+outputArtifacts:
+  # - name: app_jar
+  #   type: BINARY
+  #   location: target/my-app-1.0-SNAPSHOT.jar
+  - name: app_native_executable
+    type: BINARY
+    location: target/my-app

@@ -1,0 +1,72 @@
+#### This file has optional print/echo statements to get more information
+#### about the build runner environment before and after the yum install.
+#### This information can be helpful in understanding and debugging builds.
+version: 0.1
+component: build
+timeoutInSeconds: 600
+runAs: root
+shell: bash
+env:
+  exportedVariables:
+    - BUILDRUN_HASH
+  variables:
+    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm22-ee-java17"
+    # PATH is a reserved variable and cannot be defined as a variable.
+    # However, PATH can be changed in a build step and the change is visible in subsequent steps.
+steps:
+  - type: Command
+    name: "Define unique tag"
+    timeoutInSeconds: 40
+    command: |
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+
+  - type: Command
+    name: "Pre-yum repo checks"
+    command: |
+      printf "\n\n Contents of graal_spec.yaml file:\n $(cat graal_spec.yaml) \n\n"
+      printf "Contents of /etc/pki/rpm-gpg/:\n $(ls -alh /etc/pki/rpm-gpg/) \n"     
+      printf "Contents of /etc/yum.repos.d/:\n $(ls -alh /etc/yum.repos.d/) \n"
+      printf "Contents of etc/yum.repos.d/oci-included-ol7.repo file:\n $(cat "etc/yum.repos.d/oci-included-ol7.repo") \n"
+      printf "Output of yum list graalvm22-ee-17* :\n $(yum list graalvm22-ee-17*) \n"
+  - type: Command
+    name: "Install- GraalVM 2.2 with Native Image (Java17)"
+    command: |
+      yum -y install graalvm22-ee-17-native-image
+  - type: Command
+    name: "Set PATH Variable"
+    command: |
+      echo "JAVA_HOME: $JAVA_HOME"
+      echo "Before PATH: $PATH"
+      export PATH=$JAVA_HOME/bin:$PATH
+  - type: Command
+    name: "Post-install checks"
+    command: |
+      echo "JAVA_HOME: $JAVA_HOME"
+      echo "After PATH: $PATH"
+      printf "Java version:\n $(java -version) \n"
+      printf "Native-image version: $(native-image --version) \n"
+      printf "Maven version:\n $(mvn --version) \n"
+      echo "Current dir: $(pwd)"
+      printf "Current dir contents:\n $(ls -alh)"
+      printf "Output of yum list graalvm22-ee-17* :\n $(yum list graalvm22-ee-17*) \n"
+  - type: Command
+    name: "Build a Jar"
+    command: |
+      mvn --no-transfer-progress clean package
+  # - type: Command
+  #   name: "Run mvn clean to remove all generated build files"
+  #   command: |
+  #     mvn clean
+  - type: Command
+    name: "Build a native executable "
+    command: |
+      # mvn --no-transfer-progress clean -Pnative -DskipTests package
+      mvn --no-transfer-progress -Pnative -DskipTests package
+outputArtifacts:
+  - name: app_jar
+    type: BINARY
+    location: target/my-app-1.0-SNAPSHOT.jar
+  - name: app_native_executable
+    type: BINARY
+    location: target/my-app
