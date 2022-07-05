@@ -30,7 +30,7 @@ steps:
       printf "Contents of etc/yum.repos.d/oci-included-ol7.repo file:\n $(cat "etc/yum.repos.d/oci-included-ol7.repo") \n"
       printf "Output of yum list graalvm22-ee-17* :\n $(yum list graalvm22-ee-17*) \n"
   - type: Command
-    name: "Install- GraalVM 2.2 with Native Image (Java17)"
+    name: "Install- GraalVM 22.2 with Native Image (Java17)"
     command: |
       yum -y install graalvm22-ee-17-native-image
   - type: Command
