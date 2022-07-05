@@ -9,13 +9,17 @@ Rapid delivery of software is essential for efficiently running your application
 
 The service also provides private Git repositories to store your code and it supports connections to external code repositories. Whether you're migrating workloads to Oracle Cloud Infrastructure (OCI)—from on-premises or other clouds—or developing new applications on OCI, you can use the DevOps service to simplify your software delivery lifecycle.
 
-## OCI Devops examples 
+## OCI Devops examples (Catogorical view )
 
--   [CICD with OCI Devops services - samples](./oci-pipeline-examples/README.md)         
--   [OCI Devops Build service - samples](./oci-build-examples/README.md) 
--   [OCI Devops Deployment service - samples](./oci-deployment-examples/README.md) 
--   [OCI Source Code Management service - sample](./oci-coderepo-examples/README.md)
--   [OCI Devops Policies and Groups - sample](./oci-config-examples/README.md)
+- [CICD with OCI Devops services - samples](./oci-pipeline-examples/README.md)         
+- [OCI Devops Build service - samples](./oci-build-examples/README.md) 
+- [OCI Devops Deployment service - samples](./oci-deployment-examples/README.md) 
+- [OCI Source Code Management service - sample](./oci-coderepo-examples/README.md)
+- [OCI Devops Policies and Groups - sample](./oci-config-examples/README.md)
+
+## All samples (A to Z sorted order)
+
+- [All the published samples of OCI-devops](AIO.md)
 
 ## Instruction to clone a specific example.
 

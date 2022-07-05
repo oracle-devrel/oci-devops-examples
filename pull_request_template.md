@@ -29,6 +29,7 @@ Please delete options that are not relevant.
 - [ ] I have performed a self-review of my code
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
+- [ ] Updated/Sorted AIO.md file
 - [ ] My changes generate no new warnings.
 - [ ] All the sensitive informations are masked or removed.
 - [ ] All the links mentioned are valid and tested.

@@ -14,6 +14,13 @@ All about OCI devops build samples ..
 
 </details>
 
+<details>
+  <summary>Graal VM Enterprise - click to expand</summary>
+
+* [Build a native executable application with Graal VM Enterprise](./oci_devops_build_with_graalenterprise/)
+
+</details>
+
 
 <details>
   <summary>Security & Quality - click to expand</summary>
