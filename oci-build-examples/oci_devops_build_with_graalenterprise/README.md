@@ -98,7 +98,7 @@ To install and use GraalVM Enterprise in the DevOps build pipeline, the  build s
     ```shell
     steps:
       - type: Command
-        name: "Install- GraalVM 2.2 with Native Image (Java17)"
+        name: "Install GraalVM 22.x Native Image for Java17"
         command: |
           yum -y install graalvm22-ee-17-native-image
     ```
