@@ -3,6 +3,7 @@ All in One reference for samples - In Alphabetical (A to Z) order.
 
 - Build Caching - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-caching
 - Build Native image with Graal VM Enterprise edition - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci_devops_build_with_graalenterprise
+- Build a micronaut restapi application with Graal VM Enterprise - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci_devops_graalee_micronaut
 - Build and Deploy a Golan application using OCI Devops - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-golan-sample
 - Build and Deploy a RUST application using OCI Devops - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-cicd-rust-sample
 - Build and run a OCI devops pipeline with JAVA and Graal VM framework. - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-java-graalvm-devops-example
