@@ -1,6 +1,6 @@
-# Using GraalVM Enterprise in OCI DevOps Build Pipelines
+# Using GraalVM Enterprise in OCI DevOps to build a Micronaut REST App
 
-This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps build pipelines` to build a Java hello world application. You can use this approach to build any high-performance Java application with GraalVM Enterprise and OCI DevOps.
+This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps build pipelines` build pipelines to build a simple Micronaut hello world REST application. You can use this approach to build any high-performance Java application with Micronaut, GraalVM Enterprise and OCI DevOps.
 
 ## What is GraalVM?
 
@@ -10,16 +10,21 @@ This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps 
 
 - Oracle GraalVM Enterprise Edition is available for use on Oracle Cloud Infrastructure (OCI) at no additional cost.
 
+## What is Micronaut
+
+- Micronaut is a modern, JVM-based framework to build modular, easily testable microservice and serverless applications. By avoiding runtime reflection in favour of annotation processing, Micronaut improves the Java-based development experience by detecting errors at compile time instead of runtime and improves Java-based application start time and memory footprint. Micronaut includes a persistence framework called Micronaut Data that precomputes your SQL queries at compilation time making it a great fit for working with databases like MySQL, Oracle Autonomous Database, etc.
+
+- Micronaut uses GraalVM Native Image to build lightweight Java applications that use less memory and CPUs, and are smaller and faster because of an advanced ahead-of-time compilation technology.
 
 
 ## Specific instruction to clone only this example.
 
    ```
-   $ git init oci_devops_build_with_graalenterprise
-   $ cd oci_devops_build_with_graalenterprise
+   $ git init oci_devops_graalee_micronaut
+   $ cd oci_devops_graalee_micronaut
    $ git remote add origin <url to this git repo>
    $ git config core. sparsecheckout true
-   $ echo "oci-build-examples/oci_devops_build_with_graalenterprise/*">>.git/info/sparse-checkout
+   $ echo "oci-build-examples/oci_devops_graalee_micronaut/*">>.git/info/sparse-checkout
    $ git pull --depth=1 origin main
 
    ```
@@ -66,7 +71,7 @@ Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "C
 
 - Push the content to OCI Code repo - https://docs.oracle.com/en-us/iaas/Content/devops/using/clone_repo.htm
 
-![](images/oci_coderepo_files.png)
+![](images/oci_repo_files.png)
 
 - You may use other support version control repos as well (like Github.com,Bitbucket.com, Bitbucket Cloud etc). You may also need to adjust the policies according to connection and setup external connections accordingly - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_connection.htm
 
@@ -93,7 +98,7 @@ Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "C
 
 ## Take a closer look at the build instructions below
 
-To install and use GraalVM Enterprise in the DevOps build pipeline, the  build specification file is as follows:
+To install and use GraalVM Enterprise with Micronaut REST in the DevOps build pipeline, the  build specification file is as follows:
 
 1. Add the following command to install one or more required GraalVM Enterprise components. For example, this command installs Native Image along with the Java Development Kit (JDK) and other necessary dependencies.
 
@@ -128,37 +133,66 @@ To install and use GraalVM Enterprise in the DevOps build pipeline, the  build s
           export PATH=$JAVA_HOME/bin:$PATH
     ```
 
-4. Build a native executable for your Java application.
+4. Build a native executable for your Micronaut application.
 
     ```shell
     steps:
       - type: Command
         name: "Build a native executable"
         command: |
-          mvn --no-transfer-progress -Pnative -DskipTests package
+          ./mvnw --no-transfer-progress package -Dpackaging=native-image
     ```
 
+5. The native executable file is available under `target/MnHelloRest`.
+
+    ```shell
+    outputArtifacts:
+      - name: app_native_executable
+        type: BINARY
+        location: target/MnHelloRest
+    ```
+
+6. Package the native executable in a lightweight distroless runtime container image.
+
+    ```shell
+    steps:
+      - type: Command
+        name: "Package the native executable in a runtime container image"
+        command: |
+          docker build -f ./Dockerfile \
+                    --build-arg APP_FILE=${APP_FILE} \
+                    -t ${TAG} .
+    ```
+
+7. The runtime container image is available as a build output artifact.
+
+    ```shell
+    outputArtifacts:
+      - name: runtime_image
+        type: DOCKER_IMAGE
+        location: ${TAG}
+    ```
 Here's the complete [build specification](build_spec.yaml) file.
 
-5. The executable file can be found under path target/my-app.
-
-```markdown
-  - name: app_native_executable
-    type: BINARY
-    location: target/my-app
-```
 
 ## How to export the executable file outside of the build pipeline stage.
 
 The following instructions will help you to export the `executable app file` to OCI Artifactory and which can then be used in the further stage including deployment pipelines.
 
+Or You can create an OCI Container registry and push the build container image which can be used to deploy to the supported container-based platform (Example OKE).
+
 - Create an OCI artifact registry. https://docs.oracle.com/en-us/iaas/Content/artifacts/home.htm
 
 ![](images/oci_artifact_registry.png)
 
-- Switch back to `DevOps Project` and create an `Artifact`- https://docs.oracle.com/en-us/iaas/Content/devops/using/artifacts.htm
+- Create a public  OCI Container registry repo - https://docs.oracle.com/en-us/iaas/Content/Registry/home.htm
 
-- Select the type as `General artifact`
+![](images/oci_container_repo.png)
+
+
+- Switch back to `DevOps Project` and create Two  `Artifacts`- https://docs.oracle.com/en-us/iaas/Content/devops/using/artifacts.htm
+
+- For the first one select the type as `General artifact`
 
 ![](images/oci_devops_artifact_1.png)
 
@@ -174,21 +208,28 @@ The following instructions will help you to export the `executable app file` to 
 
 ![](images/oci_devops_artifact_3.png)
 
+- Create a second `Artifact` with type as `Container image repository`.
+- Provide a full qualified path to the image repo
+
+```markdown
+"OCI Region Key".ocir.io/"Tenancy Namespace"/"Repo Name":${BUILDRUN_HASH}
+```
+- Enable `Allow paramterization option`
+
+![](images/oci_containerrepo_devops_artifact.png)
+
 - Under `Build pipeline ` use the `+` icon after the current stage and add a new stage named `Deliver artifacts`
 
 ![](images/oci_build_deliverartifact.png)
 
-- Associate it with the `DevOps Artifact` created.
+- Associate it with the `DevOps Artifacts` created.
 
-![](images/oci_uploadartifact_reference.png)
+![](images/oci_upload_to_artifacts_ref.png)
 
-
-- Use `app_native_executable` result artifact name.
-- The name `app_native_executable` is a reference to the outputArtifact defined under the the file [build_spec.yaml](build_spec.yaml).
+- Use name `app_native_executable` result artifact name for artifact reference for `General artifacts` for executable artifact.
+- Use name `runtime_image` result artifact name for artifact reference for `Docker image` for container image artifact.
+- The name `app_native_executable` and `runtime_image` are a references to the `outputArtifacts` defined under the file [build_spec.yaml](build_spec.yaml).
 - Click `Add` and add the stage.
-
-![](images/oci_upload_artifact.png)
-
 
 - The build pipeline with two stages would look like the one below.
 
@@ -202,15 +243,19 @@ The following instructions will help you to export the `executable app file` to 
 ![](images/oci_build_startmanual_run.png)
 
 - Wait for all the stages to complete
-  ![](images/oci_buildstages_inprogress.png)
+
+![](images/oci_buildstages_inprogress.png)
 
 ![](images/oci_buildstages_done.png)
 
-- You should see a new artfact under the `Artifact registry repo` created earlier.
+- Validate the outcome - `executable artifact` or `container image`.
+- Switch to `OCI Container registry repo` and you should see a container image, which can be used to deploy onto any supported platform (Example: OKE ) or can refer to the OCI Deployment pipeline too.
 
-![](images/oci_artifact.png)
+![](images/oci_container_result.png)
 
-- The exported executable can be used on any of the supporting infrastructures to execute or can use to deploy via `OCI deployment pipeline ` to compute, container or function resources.
+- Switch to `OCI Artifact registry repo` and you should see an executable artifact.
+
+![](images/oci_artifact_result.png)
 
 ## Optional - Run build with more verbose output.
 
@@ -250,37 +295,43 @@ The following instructions will help you to export the `executable app file` to 
     ```shell
     ...
     EXEC: ==================================================================
-    EXEC: GraalVM Native Image: Generating 'my-app' (executable)...   
+    EXEC: GraalVM Native Image: Generating 'MnHelloRest' (static executable)...
     EXEC: ==================================================================
-    EXEC: [1/7] Initializing...                     (5.6s @ 0.11GB)   
+    EXEC: [1/7] Initializing...                         (6.8s @ 0.27GB)   
     EXEC:  Version info: 'GraalVM 22.1.0.1 Java 17 EE'   
     EXEC:  C compiler: gcc (redhat, x86_64, 4.8.5)   
     EXEC:  Garbage collector: Serial GC   
-    EXEC: [2/7] Performing analysis...  [******]    (9.5s @ 0.32GB)   
-    EXEC:    1,880 (62.46%) of  3,010 classes reachable   
-    EXEC:    1,684 (46.71%) of  3,605 fields reachable   
-    EXEC:    7,784 (36.98%) of 21,049 methods reachable   
-    EXEC:       21 classes,     0 fields, and   285 methods registered for reflection   
-    EXEC:       48 classes,    32 fields, and    47 methods registered for JNI access   
-    EXEC: [3/7] Building universe...                (1.1s @ 0.45GB)   
-    EXEC: [4/7] Parsing methods...      [*]         (0.8s @ 0.58GB)   
-    EXEC: [5/7] Inlining methods...     [****]      (1.2s @ 0.97GB)   
-    EXEC: [6/7] Compiling methods...    [*****]     (21.2s @ 0.75GB)   
-    EXEC: [7/7] Creating image...                   (0.9s @ 0.92GB)   
-    EXEC:    2.62MB (46.31%) for code area:    3,708 compilation units   
-    EXEC:    2.45MB (43.34%) for image heap:     945 classes and 38,518 objects   
-    EXEC:  600.06KB (10.35%) for other data   
-    EXEC:    5.66MB in total   
+    EXEC:  4 user-provided feature(s)   
+    EXEC:   - io.micronaut.buffer.netty.NettyFeature   
+    EXEC:   - io.micronaut.core.graal.ServiceLoaderFeature   
+    EXEC:   - io.micronaut.http.netty.graal.HttpNettyFeature   
+    EXEC:   - io.micronaut.jackson.JacksonDatabindFeature   
+    ...
+    EXEC: [2/7] Performing analysis...  [**************] (63.9s @ 1.98GB)   
+    EXEC:   13,612 (91.86%) of 14,818 classes reachable   
+    EXEC:   18,692 (57.10%) of 32,734 fields reachable   
+    EXEC:   74,699 (64.21%) of 116,327 methods reachable   
+    EXEC:      750 classes,   341 fields, and 2,746 methods registered for reflection   
+    EXEC:       62 classes,    68 fields, and    54 methods registered for JNI access   
+    EXEC: [3/7] Building universe...                    (5.0s @ 1.94GB)   
+    EXEC: [4/7] Parsing methods...      [***]           (5.1s @ 2.60GB)   
+    EXEC: [5/7] Inlining methods...     [****]          (8.6s @ 1.77GB)   
+    EXEC: [6/7] Compiling methods...    [***********]   (135.4s @ 1.80GB)   
+    EXEC: [7/7] Creating image...                       (6.2s @ 2.01GB)   
+    EXEC:   34.67MB (51.40%) for code area:   43,533 compilation units   
+    EXEC:   24.50MB (36.31%) for image heap:   9,698 classes and 352,409 objects   
+    EXEC:    8.29MB (12.29%) for other data   
+    EXEC:   67.46MB in total   
     EXEC: ------------------------------------------------------------------
     ...
     EXEC: ------------------------------------------------------------------
-    EXEC: 0.9s (2.1% of total time) in 18 GCs | Peak RSS: 2.44GB | CPU load: 3.41   
+    EXEC:  16.5s (6.9% of total time) in 111 GCs | Peak RSS: 4.46GB | CPU load: 3.38   
     EXEC: ------------------------------------------------------------------
     EXEC: Produced artifacts:   
-    EXEC:  /workspace/gvmee-yum/target/my-app (executable)   
-    EXEC:  /workspace/gvmee-yum/target/my-app.build_artifacts.txt   
+    EXEC:  /workspace/mn-hello/target/MnHelloRest (executable)   
+    EXEC:  /workspace/mn-hello/target/MnHelloRest.build_artifacts.txt   
     EXEC: ==================================================================
-    EXEC: Finished generating 'my-app' in 41.7s.   
+    EXEC: Finished generating 'MnHelloRest' in 3m 57s.   
     ...
     ```
 
@@ -303,8 +354,5 @@ Contributors
 - 🍿 [Back to OCI DevOps Build sample](./../README.md)
 - 🏝️ [Back to OCI Devops sample](./../../README.md)
 
-
-Regards,
-M R
  
 
