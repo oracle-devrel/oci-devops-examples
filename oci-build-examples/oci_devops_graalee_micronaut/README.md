@@ -1,6 +1,6 @@
 # Using GraalVM Enterprise in OCI DevOps to build a Micronaut REST App
 
-This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps build pipelines` build pipelines to build a simple Micronaut hello world REST application. You can use this approach to build any high-performance Java application with Micronaut, GraalVM Enterprise and OCI DevOps.
+This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps build pipelines` to build a simple Micronaut hello world REST application. You can use this approach to build any high-performance Java application with Micronaut, GraalVM Enterprise and OCI DevOps.
 
 ## What is GraalVM?
 
@@ -12,7 +12,7 @@ This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps 
 
 ## What is Micronaut
 
-- Micronaut is a modern, JVM-based framework to build modular, easily testable microservice and serverless applications. By avoiding runtime reflection in favour of annotation processing, Micronaut improves the Java-based development experience by detecting errors at compile time instead of runtime and improves Java-based application start time and memory footprint. Micronaut includes a persistence framework called Micronaut Data that precomputes your SQL queries at compilation time making it a great fit for working with databases like MySQL, Oracle Autonomous Database, etc.
+- Micronaut is a modern, JVM-based framework to build modular, easily testable microservice and serverless applications. By avoiding runtime reflection in favour of annotation processing, Micronaut improves the Java-based development experience by detecting errors at compile time instead of runtime and improves Java-based application start time and memory footprint. Micronaut includes a persistence framework called Micronaut Data that precomputes your SQL queries at compilation time making it a great fit for working with databases like Oracle Autonomous Database, MySQL, etc.
 
 - Micronaut uses GraalVM Native Image to build lightweight Java applications that use less memory and CPUs, and are smaller and faster because of an advanced ahead-of-time compilation technology.
 
@@ -32,8 +32,8 @@ This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps 
 ## Objectives
 
 - Create an OCI build pipeline.
-- Make a build using Oracle GraalVM Enterprise edition.
-- Here the focus will be on Build instructions and OCI build pipeline
+- Make a build using Oracle GraalVM Enterprise Edition.
+- Here the focus will be on the build specification and DevOps build pipeline
 
 
 ## Procedure to use this illustration.
@@ -61,8 +61,6 @@ ALL {resource.type = 'devopsrepository', resource.compartment.id = 'COMPARMENT O
 ```markdown
 Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "COMPARTMENT NAME"
 Allow dynamic-group  "NAME OF THE DynamicGroup" to use ons-topics in compartment "COMPARTMENT NAME"
-
-Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "COMPARTMENT NAME"
 ```
 
 - Switch back to OCI DevOps Project and create an OCI Code repo - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_repo.htm#create_repo
@@ -73,7 +71,7 @@ Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "C
 
 ![](images/oci_repo_files.png)
 
-- You may use other support version control repos as well (like Github.com,Bitbucket.com, Bitbucket Cloud etc). You may also need to adjust the policies according to connection and setup external connections accordingly - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_connection.htm
+- You may use other supported version control repos as well (like Github.com, Bitbucket.com, Bitbucket Cloud, etc). You may also need to adjust the policies according to the connection and setup external connections accordingly - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_connection.htm
 
 - Create a new build pipeline. - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_buildpipeline.htm
 
@@ -98,14 +96,14 @@ Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "C
 
 ## Take a closer look at the build instructions below
 
-To install and use GraalVM Enterprise with Micronaut REST in the DevOps build pipeline, the  build specification file is as follows:
+To install and use GraalVM Enterprise with Micronaut REST in the DevOps build pipeline, the build specification file is as follows:
 
 1. Add the following command to install one or more required GraalVM Enterprise components. For example, this command installs Native Image along with the Java Development Kit (JDK) and other necessary dependencies.
 
     ```shell
     steps:
       - type: Command
-        name: "Install GraalVM 22.x Native Image for Java17"
+        name: "Install GraalVM Enterprise 22.x Native Image for Java17"
         command: |
           yum -y install graalvm22-ee-17-native-image
     ```
@@ -179,20 +177,22 @@ Here's the complete [build specification](build_spec.yaml) file.
 
 The following instructions will help you to export the `executable app file` to OCI Artifactory and which can then be used in the further stage including deployment pipelines.
 
-Or You can create an OCI Container registry and push the build container image which can be used to deploy to the supported container-based platform (Example OKE).
+OR 
+
+You can create an OCI Container registry and push the build container image which can be used to deploy to the supported container-based platform (Example OKE).
 
 - Create an OCI artifact registry. https://docs.oracle.com/en-us/iaas/Content/artifacts/home.htm
 
 ![](images/oci_artifact_registry.png)
 
-- Create a public  OCI Container registry repo - https://docs.oracle.com/en-us/iaas/Content/Registry/home.htm
+- Create a public OCI Container registry repo - https://docs.oracle.com/en-us/iaas/Content/Registry/home.htm
 
 ![](images/oci_container_repo.png)
 
 
-- Switch back to `DevOps Project` and create Two  `Artifacts`- https://docs.oracle.com/en-us/iaas/Content/devops/using/artifacts.htm
+- Switch back to `DevOps Project` and create two `Artifacts`- https://docs.oracle.com/en-us/iaas/Content/devops/using/artifacts.htm
 
-- For the first one select the type as `General artifact`
+- For the first one, select the type as `General artifact`
 
 ![](images/oci_devops_artifact_1.png)
 
@@ -203,7 +203,7 @@ Or You can create an OCI Container registry and push the build container image w
 
 - Use option `Set Custom Location` as Artifact location.
 - Provide a path and version as `${BUILDRUN_HASH}`, this is to maintain immutable artifacts.
-- The variable `BUILDRUN_HASH` is derived during managed build stage and exported as an exportedVariables.You may use any other name ,but ensure to update the file [build_spec.yaml](build_spec.yaml).
+- The variable `BUILDRUN_HASH` is derived during managed build stage and exported as an exportedVariables.You may use any other name, but ensure to update the file [build_spec.yaml](build_spec.yaml).
 - Select `Yes, substitute placeholders` as an option and click `Add`.
 
 ![](images/oci_devops_artifact_3.png)
@@ -228,7 +228,7 @@ Or You can create an OCI Container registry and push the build container image w
 
 - Use name `app_native_executable` result artifact name for artifact reference for `General artifacts` for executable artifact.
 - Use name `runtime_image` result artifact name for artifact reference for `Docker image` for container image artifact.
-- The name `app_native_executable` and `runtime_image` are a references to the `outputArtifacts` defined under the file [build_spec.yaml](build_spec.yaml).
+- The name `app_native_executable` and `runtime_image` are references to the `outputArtifacts` defined under the file [build_spec.yaml](build_spec.yaml).
 - Click `Add` and add the stage.
 
 - The build pipeline with two stages would look like the one below.
@@ -249,7 +249,7 @@ Or You can create an OCI Container registry and push the build container image w
 ![](images/oci_buildstages_done.png)
 
 - Validate the outcome - `executable artifact` or `container image`.
-- Switch to `OCI Container registry repo` and you should see a container image, which can be used to deploy onto any supported platform (Example: OKE ) or can refer to the OCI Deployment pipeline too.
+- Switch to `OCI Container registry repo` and you should see a container image, which can be used to deploy onto any supported platform (Example: OKE) or can refer to the OCI Deployment pipeline too.
 
 ![](images/oci_container_result.png)
 
@@ -261,17 +261,17 @@ Or You can create an OCI Container registry and push the build container image w
 
 - An additional build instruction file as [build_spec_verbose.yaml](build_spec_verbose.yaml)
   can be used for more verbose output with the managed build.
-- To do so, switch to `OCI DevOps project` > `OCI Build pipeline ` > Click `3 dots` on the `Managed Build` stage and click on `View details` and then `Edit Stage`.
+- To do so, switch to `OCI DevOps project` > `OCI Build pipeline` > Click `3 dots` on the `Managed Build` stage and click on `View details` and then `Edit Stage`.
 
 ![](images/oci_buildstage_details.png)
 
-- Change  `Build spec file path ` as `build_spec_verbose.yaml`  and `Save changes`
+- Change  `Build spec file path` as `build_spec_verbose.yaml`  and `Save changes`
 
 ![](images/oci_buildspec_verbose.png)
 
 - Do another manal run for the build pipeline and you will see more verbose build logs.
 
-## Sample Build Logs (Non-verbose mode)
+## Sample Build Logs
 
 1. The `yum install` build log statements should be similar to:
 
@@ -338,7 +338,8 @@ Or You can create an OCI Container registry and push the build container image w
 References
 ==========
 
-- Oracle Cloud Infrastructure  DevOps - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm
+- Using GraalVM Enterprise in DevOps Build Pipelines - https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm
+- Oracle Cloud Infrastructure DevOps - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm
 - Oracle Graal VM Enterprise - https://www.oracle.com/java/graalvm/
 
 Contributors
