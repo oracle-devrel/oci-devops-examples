@@ -1,4 +1,4 @@
-# Using GraalVM Enterprise in OCI DevOps Build Pipelines
+# Using GraalVM Enterprise in OCI DevOps Build Pipelines to build a Java App
 
 This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps build pipelines` to build a Java hello world application. You can use this approach to build any high-performance Java application with GraalVM Enterprise and OCI DevOps.
 
@@ -28,7 +28,7 @@ This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps 
 
 - Create an OCI build pipeline.
 - Make a build using Oracle GraalVM Enterprise edition.
-- Here the focus will be on Build instructions and OCI build pipeline
+- Here the focus will be on the build specification and DevOps build pipeline
 
 
 ## Procedure to use this illustration.
@@ -56,8 +56,6 @@ ALL {resource.type = 'devopsrepository', resource.compartment.id = 'COMPARMENT O
 ```markdown
 Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "COMPARTMENT NAME"
 Allow dynamic-group  "NAME OF THE DynamicGroup" to use ons-topics in compartment "COMPARTMENT NAME"
-
-Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "COMPARTMENT NAME"
 ```
 
 - Switch back to OCI DevOps Project and create an OCI Code repo - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_repo.htm#create_repo
@@ -68,7 +66,7 @@ Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "C
 
 ![](images/oci_coderepo_files.png)
 
-- You may use other support version control repos as well (like Github.com,Bitbucket.com, Bitbucket Cloud etc). You may also need to adjust the policies according to connection and setup external connections accordingly - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_connection.htm
+- You may use other supported version control repos as well (like Github.com, Bitbucket.com, Bitbucket Cloud, etc.). You may also need to adjust the policies according to the connection and setup external connections accordingly - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_connection.htm
 
 - Create a new build pipeline. - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_buildpipeline.htm
 
@@ -93,14 +91,14 @@ Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "C
 
 ## Take a closer look at the build instructions below
 
-To install and use GraalVM Enterprise in the DevOps build pipeline, the  build specification file is as follows:
+To install and use GraalVM Enterprise in the DevOps build pipeline, the build specification file is as follows:
 
 1. Add the following command to install one or more required GraalVM Enterprise components. For example, this command installs Native Image along with the Java Development Kit (JDK) and other necessary dependencies.
 
     ```shell
     steps:
       - type: Command
-        name: "Install GraalVM 22.x Native Image for Java17"
+        name: "Install GraalVM Enterprise 22.x Native Image for Java17"
         command: |
           yum -y install graalvm22-ee-17-native-image
     ```
@@ -138,15 +136,16 @@ To install and use GraalVM Enterprise in the DevOps build pipeline, the  build s
           mvn --no-transfer-progress -Pnative -DskipTests package
     ```
 
-Here's the complete [build specification](build_spec.yaml) file.
-
-5. The executable file can be found under path target/my-app.
+5. The executable file can be found under `target/my-app`.
 
 ```markdown
   - name: app_native_executable
     type: BINARY
     location: target/my-app
 ```
+
+Here's the complete [build specification](build_spec.yaml) file.
+
 
 ## How to export the executable file outside of the build pipeline stage.
 
@@ -174,7 +173,7 @@ The following instructions will help you to export the `executable app file` to 
 
 ![](images/oci_devops_artifact_3.png)
 
-- Under `Build pipeline ` use the `+` icon after the current stage and add a new stage named `Deliver artifacts`
+- Under `Build pipeline` use the `+` icon after the current stage and add a new stage named `Deliver artifacts`
 
 ![](images/oci_build_deliverartifact.png)
 
@@ -210,7 +209,7 @@ The following instructions will help you to export the `executable app file` to 
 
 ![](images/oci_artifact.png)
 
-- The exported executable can be used on any of the supporting infrastructures to execute or can use to deploy via `OCI deployment pipeline ` to compute, container or function resources.
+- The exported executable can be used on any of the supporting infrastructures to execute or can use to deploy via `OCI deployment pipeline` to compute, container or function resources.
 
 ## Optional - Run build with more verbose output.
 
@@ -220,13 +219,13 @@ The following instructions will help you to export the `executable app file` to 
 
 ![](images/oci_buildstage_details.png)
 
-- Change  `Build spec file path ` as `build_spec_verbose.yaml`  and `Save changes`
+- Change  `Build spec file path` as `build_spec_verbose.yaml`  and `Save changes`
 
 ![](images/oci_buildspec_verbose.png)
 
-- Do another manal run for the build pipeline and you will see more verbose build logs.
+- Do another manual run for the build pipeline and you will see more verbose build logs.
 
-## Sample Build Logs (Non-verbose mode)
+## Sample Build Logs
 
 1. The `yum install` build log statements should be similar to:
 
@@ -287,7 +286,8 @@ The following instructions will help you to export the `executable app file` to 
 References
 ==========
 
-- Oracle Cloud Infrastructure  DevOps - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm
+- Using GraalVM Enterprise in DevOps Build Pipelines - https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm
+- Oracle Cloud Infrastructure DevOps - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm
 - Oracle Graal VM Enterprise - https://www.oracle.com/java/graalvm/
 
 Contributors
