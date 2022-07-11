@@ -43,19 +43,19 @@ This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps 
 
 ![](images/oci_devops_logs.png)
 
-Create an OCI Dynamic group and add the below rules. - https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingdynamicgroups.htm
+Create an OCI Dynamic group and add the below rules. Replace `<YOUR_COMPARMENT_OCID>` with your compartment OCID. - https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingdynamicgroups.htm
 
 ```markdown
-ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = 'COMPARMENT OCID'}
+ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = '<YOUR_COMPARMENT_OCID>'}
 
-ALL {resource.type = 'devopsrepository', resource.compartment.id = 'COMPARMENT OCID'}
+ALL {resource.type = 'devopsrepository', resource.compartment.id = '<YOUR_COMPARMENT_OCID>'}
 ```
 
-- Create an OCI policy and add the below policies - https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/policies.htm
+- Create an OCI policy and add the following policy statements. Replace `<YOUR_DynamicGroup_NAME>` with the name of your dynamic group, and `<YOUR_COMPARTMENT_NAME>` with the name of your compartment. - https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/policies.htm
 
 ```markdown
-Allow dynamic-group "NAME OF THE DynamicGroup" to manage repos in compartment "COMPARTMENT NAME"
-Allow dynamic-group  "NAME OF THE DynamicGroup" to use ons-topics in compartment "COMPARTMENT NAME"
+Allow dynamic-group <YOUR_DynamicGroup_NAME> to manage repos in compartment <YOUR_COMPARTMENT_NAME>
+Allow dynamic-group  <YOUR_DynamicGroup_NAME> to use ons-topics in compartment <YOUR_COMPARTMENT_NAME>
 ```
 
 - Switch back to OCI DevOps Project and create an OCI Code repo - https://docs.oracle.com/en-us/iaas/Content/devops/using/create_repo.htm#create_repo
