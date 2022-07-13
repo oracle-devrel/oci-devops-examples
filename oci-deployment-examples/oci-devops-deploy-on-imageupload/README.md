@@ -271,6 +271,11 @@ Contributors
 - Author: [Rahul M R](https://github.com/RahulMR42).
 - Last release: July 2022
 
+### Back to examples.
+----
+
+- 🍿 [Back to OCI Devops Deployment sample](./../README.md)
+- 🏝️ [Back to OCI Devops sample](./../../README.md)
 
 
 
