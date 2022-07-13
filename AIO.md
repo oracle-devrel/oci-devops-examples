@@ -21,5 +21,6 @@ All in One reference for samples - In Alphabetical (A to Z) order.
 - Integrate GITHUB.com repo with OCI Devops . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-with-github
 - Integrate GITLAB.com repo with OCI Devops . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-with-gitlab
 - Integrate sonarqube with OCI devops build runner. - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci_buildrunner_with_sonarqube
+- Invoke deployment pipeline on a container image upload  - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-deploy-on-imageupload
 - OCI Policy management using terraform - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-config-examples/oci_devops_policy_dg_terraform
 - Scanning code for vulnerabilities for Maven packages - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-vulnerability-audit-management
