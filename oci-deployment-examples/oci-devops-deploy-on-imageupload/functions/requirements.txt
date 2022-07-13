@@ -1,0 +1,4 @@
+fdk>=0.1.40
+kubernetes==19.15.0
+oci==2.51.0
+oci-cli==3.3.1
