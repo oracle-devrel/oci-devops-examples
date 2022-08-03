@@ -1,0 +1,65 @@
+name: OCI Deploy
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "dev" branch
+  push:
+    branches: [ "main"]
+
+jobs:
+  get-ocir-repository-test:
+    runs-on: ubuntu-latest
+    name: Invoke OCI Deployment on to OKE .
+    env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+
+    steps:
+      - name: Get or create an OCIR Repository
+        uses: oracle-actions/get-ocir-repository@v1.0
+        id: get-ocir-repository
+        with:
+          name: python_fastapi_app
+          compartment: ${{ secrets.OCI_COMPARTMENT_OCID }}
+
+      - name: Log into OCIR
+        uses: oracle-actions/login-ocir@v1.0
+        id: login-ocir
+        with:
+          auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Tag and push a container image
+        id: tag-and-push-image
+        run: |
+          ls -ltr
+          docker build -t "${{ steps.get-ocir-repository.outputs.repo_path }}:${{github.run_number}}" .
+          docker push "${{ steps.get-ocir-repository.outputs.repo_path }}:${{github.run_number}}"
+
+
+      - name: Generate deploy arguments
+        id: create-json
+        run: |
+          echo "::set-output name=metadata::{\"created_by\":\"$GITHUB_ACTOR\",\"triggered_by\":\"$GITHUB_EVENT_NAME\"}"
+          echo "::set-output name=deployargs::{\"items\":[{\"name\":\"namespace\",\"value\":\"ns-github\"},{\"name\":\"image_tag\",\"value\":\"$GITHUB_RUN_NUMBER\"}]}"
+
+
+      - name: Display and save the generated JSON
+        run: |
+          echo '${{ steps.create-json.outputs.metadata }}' | jq
+          echo '${{ steps.create-json.outputs.deployargs }}'
+
+
+      - name: Invoke deployment pipeline
+        uses: oracle-actions/run-oci-cli-command@v1.0
+        id:  invoke-deployments
+        with:
+          command: devops deployment create-pipeline-deployment --pipeline-id ${{ secrets.DEPLOYMENT_PIPELINE_OCID }} --deployment-arguments ${{ toJSON(steps.create-json.outputs.deployargs) }}
+          silent: false
+
+
+
