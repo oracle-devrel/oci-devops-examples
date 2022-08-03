@@ -1,5 +1,5 @@
 All in One reference for samples - In Alphabetical (A to Z) order.
-------- 
+-------
 
 - Build Caching - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-caching
 - Build Native image with Graal VM Enterprise edition - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci_devops_build_with_graalenterprise
@@ -16,6 +16,7 @@ All in One reference for samples - In Alphabetical (A to Z) order.
 - Deploy to OKE following OCI Devops canary deployment strategy - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-deploy-with-canary-model-oke
 - Deploy to OKE with a stateful backend data with canary strategy - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-oke-canary-with-stateful-app
 - Deploy using helmchart to an OKE on an artifact upload - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci_helm_function_deployment
+- Deployment with Github actions - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-githubactions-deploy
 - Devops related policies and groups - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-config-examples/oci-devops-policies-groups
 - Integrate Bitbucket.org repo with OCI Devops . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-with-bitbucketcloud
 - Integrate GITHUB.com repo with OCI Devops . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-with-github
