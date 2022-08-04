@@ -1,4 +1,4 @@
-# Sample illustration of invoking a OCI Devops Deployment pipeline with [OCI Gitbub action](https://blogs.oracle.com/cloud-infrastructure/post/github-actions-with-oci).
+# Sample illustration of invoking a OCI Devops Deployment pipeline with [OCI Github actions](https://blogs.oracle.com/cloud-infrastructure/post/github-actions-with-oci).
 
 ------------
 
