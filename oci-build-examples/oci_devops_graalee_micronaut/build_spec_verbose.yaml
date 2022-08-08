@@ -13,8 +13,6 @@ env:
     # However, PATH can be changed in a build step and the change is visible in subsequent steps.
     TAG: "mn-hello-ni:0.0.1"
     APP_FILE: "MnHelloRest"
-    ## TEMPORARY WORKAROUND FOR GVME 22.2
-    USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM: false
 
   # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
   # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
