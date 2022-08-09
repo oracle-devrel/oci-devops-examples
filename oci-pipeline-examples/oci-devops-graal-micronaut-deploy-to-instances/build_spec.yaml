@@ -1,0 +1,64 @@
+version: 0.1
+component: build
+timeoutInSeconds: 900
+failImmediatelyOnError: true
+runAs: root
+shell: bash
+env:
+  variables:
+    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm22-ee-java17"
+    # PATH is a reserved variable and cannot be defined as a variable.
+    # However, PATH can be changed in a build step and the change is visible in subsequent steps.
+    TAG: "mn-hello-ni:0.0.1"
+    APP_FILE: "MnHelloRest"
+    ARTIFACT_FILE_NAME: "exec-app"
+  vaultVariables:
+    ARTIFACT_REPO_OCID_FromVault: ocid1.vaultsecret.oc1.us-sanjose-1.amaaaaaayat6pyaakxdpdeydoqw2a5eu6c34fb7mokyiwahnrpddwch6nfeq
+
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+    - ARTIFACT_NAME
+    - ARTIFACT_REPO_OCID
+
+steps:
+  - type: Command
+    name: "Exported variables"
+    timeoutInSeconds: 140
+    command: |
+      echo "OCI_BUILD_RUN_ID: ${OCI_BUILD_RUN_ID}"
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+      export ARTIFACT_REPO_OCID=${ARTIFACT_REPO_OCID_FromVault}
+      export ARTIFACT_NAME=${ARTIFACT_FILE_NAME}
+  - type: Command
+    name: "Install GraalVM 22.x Native Image for Java17"
+    command: |
+      yum -y install graalvm22-ee-17-native-image
+  - type: Command
+    name: "Set PATH Variable."
+    command: |
+      export PATH=$JAVA_HOME/bin:$PATH
+  # - type: Command
+  #   name: "Build a Jar"
+  #   command: |
+  #     mvn --no-transfer-progress clean package
+  - type: Command
+    name: "Build a native executable"
+    command: |
+      ls -ltr
+      mvn --no-transfer-progress package -Dpackaging=native-image
+
+outputArtifacts:
+  - name: app_native_executable
+    type: BINARY
+    location: target/MnHelloRest
+
+#  - name: app_jar_output
+#    type: BINARY
+#    location: target/my-app-1.0-SNAPSHOT.jar
+
+  - name: deployment_spec
+    type: BINARY
+    location: instance_deployment_spec.yaml

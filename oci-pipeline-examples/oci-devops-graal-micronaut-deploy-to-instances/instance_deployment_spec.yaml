@@ -1,0 +1,51 @@
+version: 1.0
+component: deployment
+shell: bash
+env:
+  variables:
+    # Local variables
+  vaultVariables:
+    # Vault variables
+files:
+  # This section is to define how the files in the artifact shall
+  # be put on the compute instance
+  - source: /
+    destination: /tmp/
+steps:
+  # This section is to define the scripts that each step shall run on the instance after file copy.
+  - stepType: Command
+    name: Install OCI CLI
+    command: |
+      cd ~
+      python3 -m pip install --user oci-cli
+
+    timeoutInSeconds: 5000
+    shell: bash
+    onFailure:
+      - stepType: Command
+        name: "Failure Handling"
+        timeoutInSeconds: 1200
+        command: |
+          echo "Handled failure"
+
+  - stepType: Command
+    name: Run the Application
+    command: |
+      cd ~
+      pid_count=`ps -fe |grep appexec | grep -v grep | wc -l`
+      pid=`ps -fe |grep appexec | grep -v grep |awk '{print $1}'`
+      if [[ $pid_count == 1 ]]  ;then kill -9 $pid ; fi
+      export OCI_CLI_AUTH=instance_principal
+      export PATH=$PATH:~/.local/bin/
+      oci artifacts generic artifact download-by-path --repository-id ${ARTIFACT_REPO_OCID} --artifact-path ${ARTIFACT_NAME} --artifact-version ${BUILDRUN_HASH} --file appexec
+      chmod +x appexec
+      ./appexec &
+
+    timeoutInSeconds: 5000
+    shell: bash
+    onFailure:
+      - stepType: Command
+        name: "Failure Handling"
+        timeoutInSeconds: 1200
+        command: |
+          echo "Handled failure"
