@@ -426,6 +426,22 @@ steps:
         java -jar app.jar &
 ```
 
+
+## Clean up the resources .
+
+Clean all these resources via OCI Console .
+
+- Delete the artifacts and then the artifact registry repo.
+- Request deletion of the Vault secret / Master key / Vault if necessary.
+- Delete Devops Deployment stage  and then deployment pipeline.
+- Delete Devops build stages and then build pipeline.
+- Delete Devops artifacts and Environments.
+- Delete the logs/Log group if necessary.
+- Delete Devops project.
+- Delete the instance/s.
+- Delete the polices / dynamic groups.
+
+
 References
 ==========
 

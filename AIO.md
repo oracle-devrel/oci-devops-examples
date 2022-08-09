@@ -26,4 +26,3 @@ All in One reference for samples - In Alphabetical (A to Z) order.
 - Invoke deployment pipeline on a container image upload  - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-deploy-on-imageupload
 - OCI Policy management using terraform - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-config-examples/oci_devops_policy_dg_terraform
 - Scanning code for vulnerabilities for Maven packages - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-vulnerability-audit-management
-  rahulmr_in@rahulmr_in-mac oci-devops-examples % 
