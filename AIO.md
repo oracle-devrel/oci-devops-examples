@@ -6,6 +6,7 @@ All in One reference for samples - In Alphabetical (A to Z) order.
 - Build a micronaut restapi application with Graal VM Enterprise - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci_devops_graalee_micronaut
 - Build and Deploy a Golan application using OCI Devops - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-golan-sample
 - Build and Deploy a RUST application using OCI Devops - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-cicd-rust-sample
+- Build and deploy a JAVA - Graal EE - Micronaut application on to Instances - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-graal-micronaut-deploy-to-instances
 - Build and run a OCI devops pipeline with JAVA and Graal VM framework. - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-java-graalvm-devops-example
 - Build and run a OCI devops pipeline with Java-Micronaut framework. - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-java-micronaut-devops-example
 - Cascaded Pipelines - With in the Region - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-cascaded-pipelines/same-region
@@ -25,3 +26,4 @@ All in One reference for samples - In Alphabetical (A to Z) order.
 - Invoke deployment pipeline on a container image upload  - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-deploy-on-imageupload
 - OCI Policy management using terraform - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-config-examples/oci_devops_policy_dg_terraform
 - Scanning code for vulnerabilities for Maven packages - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-vulnerability-audit-management
+  rahulmr_in@rahulmr_in-mac oci-devops-examples % 

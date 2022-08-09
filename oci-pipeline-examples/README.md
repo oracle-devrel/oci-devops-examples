@@ -1,19 +1,33 @@
 All about devops pipelines using OCI Devops.
 =======
 <details>
-  <summary>JAVA Applications - click to expand</summary>
-  
-* [Build and run a OCI devops pipeline with Java-Micronaut framework.](./oci-java-micronaut-devops-example/)
-
-* [Build and run a OCI devops pipeline with JAVA and Graal VM framework.](./oci-java-graalvm-devops-example/)
-
-</details>
-<details>
   <summary>Cascaded Pipelines - click to expand</summary>
-  
+
 * [Cascaded Pipelines - With in the Region](./oci-cascaded-pipelines/same-region/)
 
 </details>
+<details>
+<summary> Pipeline with Graal Enterprise - click to expand</summary>
+
+* [Build and deploy a JAVA - Graal EE - Micronaut application on to Instances](./oci-devops-graal-micronaut-deploy-to-instances)
+
+</details>
+<details>
+  <summary>Golan Applications - click to expand</summary>
+
+* [Build and Deploy a Golan application using OCI Devops](./oci-devops-golan-sample/)
+
+</details>
+
+<details>
+  <summary>JAVA Applications - click to expand</summary>
+  
+* [Build and run a OCI devops pipeline with Java-Micronaut framework on to OKE.](./oci-java-micronaut-devops-example/)
+
+* [Build and run a OCI devops pipeline with JAVA and Graal VM framework on to OKE .](./oci-java-graalvm-devops-example/)
+
+</details>
+
 
 </details>
 <details>
@@ -23,12 +37,6 @@ All about devops pipelines using OCI Devops.
 
 </details>
 
-
-</details>
-<details>
-  <summary>Golan Applications - click to expand</summary>
-
-* [Build and Deploy a Golan application using OCI Devops](./oci-devops-golan-sample/)
 
 </details>
 

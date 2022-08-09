@@ -307,6 +307,8 @@ curl http://<PUBLIC IP ADDRESS OF THE INSTANCE>:8080/
 
 ![](images/oci-app-output.png)
 
+![](images/oci-curl-op.png)
+
 #Tail end - Close look at resources and configurations
 
 ## Build specifications - close look at the steps, the whole file can be referred to here [buildspec](build_spec.yaml)
