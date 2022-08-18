@@ -304,7 +304,4 @@ Contributors
 - 🏝️ [Back to OCI Devops sample](./../../README.md)
 
 
-Regards,
-M R
- 
 
