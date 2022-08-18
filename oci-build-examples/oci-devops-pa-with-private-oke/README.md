@@ -124,7 +124,7 @@ This sample shows how to access resources which are with private IP addresses fr
 
 ![](images/oci-build-manual-run.png)
 
--Wait for all the steps to complete.
+- Wait for all the steps to complete.
 
 - View the build execution logs and validate the access.
 
