@@ -22,6 +22,15 @@ All about OCI devops build samples ..
 
 </details>
 
+<details>
+  <summary>Private resource access - click to expand</summary>
+
+* [Access OKE with Private endpoint from build runner](./oci-devops-pa-with-private-oke/)
+
+
+
+</details>
+
 
 <details>
   <summary>Security & Quality - click to expand</summary>

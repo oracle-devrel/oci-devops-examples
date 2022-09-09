@@ -38,6 +38,8 @@ steps:
       export OCI_CLI_AUTH=instance_principal
       export PATH=$PATH:~/.local/bin/
       oci artifacts generic artifact download-by-path --repository-id ${ARTIFACT_REPO_OCID} --artifact-path ${ARTIFACT_NAME} --artifact-version ${BUILDRUN_HASH} --file appexec
+      sudo firewall-cmd --zone=public --permanent --add-port 8080/tcp
+      sudo firewall-cmd --reload
       chmod +x appexec
       ./appexec &
 

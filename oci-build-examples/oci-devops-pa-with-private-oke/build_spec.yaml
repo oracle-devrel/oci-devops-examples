@@ -1,0 +1,56 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+  vaultVariables:
+  #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+  #Variable to export and use with in further stages.
+
+inputArtifacts:
+  - name: kubectl_cli
+    type: URL
+    url: https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+    location: ${OCI_PRIMARY_SOURCE_DIR}/kubectl
+
+
+steps:
+  - type: Command
+    timeoutInSeconds: 6000
+    name: "Access a Private OKE from Build runner"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      oci ce cluster create-kubeconfig --cluster-id ${OCI_OKE_OCID} --file kube_config --region ${OCI_REGION} --token-version 2.0.0  --kube-endpoint PRIVATE_ENDPOINT
+      export KUBECONFIG=./kube_config
+      chmod +x kubectl
+      export PATH=${PATH}:${OCI_PRIMARY_SOURCE_DIR}
+      kubectl get nodes
+      echo "Applying SVC Config..."
+      kubectl apply -f sample_oke_svc.yaml
+      echo "Validate the SVC..."
+      kubectl describe svc sample-svc
+      echo "Delete the SVC..."
+      kubectl delete -f sample_oke_svc.yaml
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+
+#outputArtifacts:
+#  - name: sample
+#    type: DOCKER_IMAGE/BINARY
+#    # this location tag doesn't effect the tag used to deliver the container image
+#    # to the Container Registry
+#    location:
