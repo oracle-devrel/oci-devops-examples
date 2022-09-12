@@ -27,7 +27,7 @@ This sample shows how to access resources which are with private IP addresses fr
 
 ## Procedure to use this illustration.
 
-###OCI Notifications
+### OCI Notifications
 - Create an OCI notification topic - https://docs.oracle.com/en-us/iaas/Content/Notification/Tasks/managingtopicsandsubscriptions.htm#createTopic
 
 ### OCI Container Engine for Kubernetes (OKE)
