@@ -1,7 +1,7 @@
 
 
 
-# Sample illustration of OCI Devops deployment pipeline to update the deployment environment - Instances dynamically.
+# Sample illustration of OCI Devops deployment pipeline to update the `deployment environment - Instances dynamically` .
 
 
 ### Audience: Experience and Experts of OCI Devops.
