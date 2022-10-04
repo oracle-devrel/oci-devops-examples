@@ -100,7 +100,7 @@ shape='VM.Standard.E3.Flex'
 ![](images/oci-query-shape.png)
 
 
-- You may also use various other parameters of instanes like `definedTags`, `lifecycleState`,
+- You may also use various other parameters of instances like `definedTags`, `lifecycleState`,
 
 #### Operators supports
 
