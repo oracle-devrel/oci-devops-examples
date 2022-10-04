@@ -72,7 +72,7 @@ freeformTags.key = 'env' && freeformTags.value = 'prod'
 ```java
 freeformTags.key = 'env' && freeformTags.value = 'prod' && lifecycleState= 'RUNNING'
 ```
-#### Using most commong compute instance attributes.
+#### Using most common compute instance attributes.
 
 - Using `availabilityDomain`
 
@@ -100,7 +100,7 @@ shape='VM.Standard.E3.Flex'
 ![](images/oci-query-shape.png)
 
 
-- You may also use various other paramters of instanes like `definedTags`, `lifecycleState`,
+- You may also use various other parameters of instanes like `definedTags`, `lifecycleState`,
 
 #### Operators supports
 
