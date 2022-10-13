@@ -62,7 +62,8 @@ A sample illustration of [Bitbucket Cloud ](https://bitbucket.org/product?&aceid
 - Create a `Dynamic group` with the below rules.
 
 ```
-ALL {resource.type = 'devopsconnection', resource.compartment.id = 'ocid1.compartment.oc1..xxxxx'}
+ALL {resource.type = 'devopsconnection', resource.compartment.id = 'COMPARMENT OCID'}
+ALL {resource.type = 'devopsrepository', resource.compartment.id = 'COMPARMENT OCID'}
 ```
 
 - Create a policy (Ensure to create it under the ROOT of tenancy) for the dynamic groups with the below policy statement.

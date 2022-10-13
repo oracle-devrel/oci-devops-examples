@@ -65,7 +65,8 @@ A sample illustration of [Gitlab](https://gitlab.com/) code repo integration wit
 - Create a `Dynamic group` with below rules .
 
 ```
-ALL {resource.type = 'devopsconnection', resource.compartment.id = 'ocid1.compartment.oc1..xxxxx'}
+ALL {resource.type = 'devopsconnection', resource.compartment.id = 'COMPARMENT OCID'}
+ALL {resource.type = 'devopsrepository', resource.compartment.id = 'COMPARMENT OCID'}
 ```
 
 ![](images/oci-dg.png)
