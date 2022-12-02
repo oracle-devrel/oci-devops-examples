@@ -13,6 +13,13 @@ All about OCI devops build samples ..
 * [All about predefined system variables](./oci_build_parameters/)
 
 </details>
+<details>
+  <summary>Compute Agents executions</summary>
+
+* [Run commands on WINDOWS host from build pipeline](./oci-devops-connect-to-windows-from-buildmachines/)
+
+
+</details>
 
 <details>
   <summary>Graal VM Enterprise - click to expand</summary>
@@ -41,6 +48,8 @@ All about OCI devops build samples ..
 
 
 </details>
+
+
 
 
 

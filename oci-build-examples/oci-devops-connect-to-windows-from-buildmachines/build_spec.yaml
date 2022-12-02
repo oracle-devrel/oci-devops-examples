@@ -1,0 +1,59 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    LOCAL_CHECK_STATE: "SUCCEEDED" #Its a dummy variable for now ,but can be used if you wish to add more status checks across.
+    TIMEOUT_IN_SECONDS: 700 #Its a timeout for compute agent execution.
+
+steps:
+  - type: Command
+    name: " Update Object Storage"
+    timeoutInSeconds: 200
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      oci os object put --namespace ${OBJECTSTORAGE_NAMESPACE} --bucket-name ${OBJECTSTORAGE_BUCKET} --file input_windows.txt --no-multipart --force
+
+    # In the above step Using input_windows.txt file to push to object,if you wish to use different name ,please do update the content.json as well.
+
+  - type: Command
+    name: "OCI Instance Agent Inovkation"
+    timeoutInSeconds: 20000
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      if [ ! -e "instance.json" ] ; then
+          echo '{"instanceId": "'${INSTANCE_OCID}'"}' > instance.json
+
+      fi
+      cat content.json |envsubst >content_target.json
+      cat content_target.json
+      COMPARTMENT_OCID=$(oci devops build-pipeline get --build-pipeline-id $OCI_PIPELINE_ID --query "data.\"compartment-id\"" --raw-output)
+      oci instance-agent command create --compartment-id ${COMPARTMENT_OCID} --content file://content_target.json --target file://instance.json --timeout-in-seconds ${TIMEOUT_IN_SECONDS} --display-name "cmd_by_build_${BUILDRUN_HASH}"
+      echo "Invoked Command exec with a display - cmd_by_build_${BUILDRUN_HASH}"
+      echo "Sleeping for ${TIMEOUT_IN_SECONDS} seconds...."
+      sleep ${TIMEOUT_IN_SECONDS}
+
+
+  - type: Command
+    name: "Read from Object storage"
+    timeoutInSeconds: 10000
+    command: |
+      cd ${OCI_WORKSPACE_DIR}/${code_repo_name}
+      if [ "${LOCAL_CHECK_STATE}" != "FAILED" ] ;then
+        oci os object get --namespace ${OBJECTSTORAGE_NAMESPACE} --bucket-name ${OBJECTSTORAGE_BUCKET} --file from_object_store.txt --name output_windows.txt
+        echo """"""""""""""""""""""""""""""""Execution Output""""""""""""""""""""""""""""""""""""""""""""""""""
+        cat from_object_store.txt
+        echo """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+      fi
+      
+  # In the above steps ,reading the agent execution output from a file named output_windows.txt,for any changes ,do update the content.json as well.
+
+
+
+      
+     
+

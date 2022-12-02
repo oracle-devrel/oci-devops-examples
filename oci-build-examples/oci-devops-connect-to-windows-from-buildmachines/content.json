@@ -1,0 +1,20 @@
+{
+  "output":
+  {
+    "bucketName": "${OBJECTSTORAGE_BUCKET}",
+    "namespaceName": "${OBJECTSTORAGE_NAMESPACE}",
+    "objectName": "output_windows.txt",
+    "outputType": "OBJECT_STORAGE_TUPLE",
+    "outputUri": "https://objectstorage.${OCI_REGION}.oraclecloud.com/n/${OBJECTSTORAGE_NAMESPACE}/b/${OBJECTSTORAGE_BUCKET}/o/output_windows.txt"
+  },
+
+  "source":
+  {
+    "bucketName": "${OBJECTSTORAGE_BUCKET}",
+    "namespaceName": "${OBJECTSTORAGE_NAMESPACE}",
+    "objectName": "input_windows.txt",
+    "sourceType": "OBJECT_STORAGE_TUPLE",
+    "sourceUri": "https://objectstorage.${OCI_REGION}.oraclecloud.com/n/${OBJECTSTORAGE_NAMESPACE}/b/${OBJECTSTORAGE_BUCKET}/o/input_windows.txt"
+  }
+
+}
