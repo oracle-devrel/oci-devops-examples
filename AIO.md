@@ -1,5 +1,7 @@
 All in One reference for samples - In Alphabetical (A to Z) order.
 -----
+
+- A way (workaround) to execute commands on to a Windows machine using OCI Run command agent from OCI Build pipeline. - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-connect-to-windows-from-buildmachines
 - Access resource with Private IP from OCI Build runner - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-pa-with-private-oke
 - Build Caching - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-caching
 - Build Native image with Graal VM Enterprise edition - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci_devops_build_with_graalenterprise
