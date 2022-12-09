@@ -16,7 +16,7 @@ The procedure illustrates the cascade deletion of OCI DevOps projects.
 Procedure to use the illustration
 -------
 
-- Use `OCI Console` >`Developer service`>`Devops` and the `Project name
+- Use `OCI Console` >`Developer service`>`Devops` and the `Project name`
 
 ![](images/oci-project-view.png)
 
