@@ -40,7 +40,6 @@ Read more
 ---
 
 - OCI DevOps service - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm
-- OCI Compute run command agent - https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/runningcommands.htm
 
 Contributors
 ===========
