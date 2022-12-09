@@ -1,4 +1,4 @@
-All about OCI devops deployment samples ..
+All about OCI devops Projects & Config samples ..
 =======
 
 <details>
@@ -6,6 +6,13 @@ All about OCI devops deployment samples ..
   
 * [Devops related policies and groups](./oci-devops-policies-groups/)
 * [OCI Policy management using terraform](./oci_devops_policy_dg_terraform/)
+
+</details>
+
+<details>
+  <summary>Projects - click to expand</summary>
+
+* [Cascade Deletion of Project](./oci-project-cascadedelete/)
 
 </details>
 
