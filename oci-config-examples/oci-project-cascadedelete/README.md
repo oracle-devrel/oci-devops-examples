@@ -2,6 +2,8 @@ Cascade delete of `DevOps Project`.
 ------
 The procedure illustrates the cascade deletion of OCI DevOps projects.
 
+* Specific instruction to clone only this example.
+
    ```
    $ git init oci-project-cascade delete
    $ cd oci-project-cascadedelete
