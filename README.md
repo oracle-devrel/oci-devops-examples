@@ -15,7 +15,7 @@ The service also provides private Git repositories to store your code and it sup
 - [⚡ OCI Devops Build service - samples](./oci-build-examples/README.md) 
 - [⚡ OCI Devops Deployment service - samples](./oci-deployment-examples/README.md) 
 - [⚡ OCI Source Code Management service - sample](./oci-coderepo-examples/README.md)
-- [⚡ OCI Devops Policies and Groups - sample](./oci-config-examples/README.md)
+- [⚡ OCI Devops Projects,Policies and Groups - sample](./oci-config-examples/README.md)
 
 ## All samples (A to Z sorted order)
 
