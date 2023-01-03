@@ -146,6 +146,8 @@ kubectl describe deployment.apps/nginx-deployment -n nginx14|grep Port
 
 ![](images/oci-multi-override.png)
 
+- Ensure to delete OKE resources and devops project related resources once completed . You can use `Cascade deletion` option with in `Devops project` to clean all the devops related resources. 
+
 Read more
 ----
 
