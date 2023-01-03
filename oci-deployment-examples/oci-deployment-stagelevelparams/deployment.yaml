@@ -17,19 +17,3 @@ spec:
           image: nginx:${version}
           ports:
             - containerPort: ${port}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sample-nginx
-  annotations:
-    service.beta.kubernetes.io/oci-load-balancer-shape: "10Mbps"
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 80
-  selector:
-    app: nginx
