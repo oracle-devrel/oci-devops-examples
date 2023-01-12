@@ -1,0 +1,8 @@
+{
+  "targetFap" : 0.01,
+  "trainingFraction" : 0.7,
+  "dataAssetIds" :
+  [
+    "OCI of DATA SET"
+  ]
+}
