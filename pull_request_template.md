@@ -30,8 +30,9 @@ Please delete options that are not relevant.
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
 - [ ] Updated/Sorted AIO.md file
+- [ ] Updated recent samples sections of README.md
 - [ ] My changes generate no new warnings.
-- [ ] All the sensitive informations are masked or removed.
+- [ ] All the sensitive information are masked or removed.
 - [ ] All the links mentioned are valid and tested.
 - [ ] Image names are seperated only with '-'.
 - [ ] Added instruction to clone only this sample and links to other common sample pages. 
