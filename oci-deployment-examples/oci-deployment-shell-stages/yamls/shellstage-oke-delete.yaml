@@ -1,0 +1,31 @@
+version: 0.1
+component: command
+timeoutInSeconds: 10000
+shell: bash
+failImmediatelyOnError: true
+env:
+  variables:
+    NAMESPACE: "ns-demo"
+  vaultVariables:
+  # key: "OCID of a VAULT SECRET"
+#inputArtifacts:
+#  - name: sample-kube-yaml
+#    type: URL
+#    url: https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/application/deployment.yaml
+#    location: ${OCI_WORKSPACE_DIR}/ngnix.yaml
+
+steps:
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Delete namespace"
+    command: |
+      oci ce cluster create-kubeconfig --cluster-id ${OKE_OCID} --file $HOME/.kube/config --region ${REGION} --token-version 2.0.0  --kube-endpoint ${OKE_ENDPOINT_TYPE}
+      kubectl get nodes
+      export NS_CUSTOM=${NAMESPACE}-`date +%d%m%Y`
+      echo "Deleting namespace ${NS_CUSTOM}"
+      kubectl delete ns ${NS_CUSTOM}
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handled Failure"
+        timeoutInSeconds: 40

@@ -1,0 +1,17 @@
+version: 0.1
+component: command
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+
+steps:
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Setup kube config"
+    command: |
+      echo "Hello via a simple shell stage"
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handled Failure"
+        timeoutInSeconds: 40

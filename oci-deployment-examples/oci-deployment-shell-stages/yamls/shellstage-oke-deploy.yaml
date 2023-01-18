@@ -1,0 +1,39 @@
+version: 0.1
+component: command
+timeoutInSeconds: 10000
+shell: bash
+failImmediatelyOnError: true
+env:
+  variables:
+    NAMESPACE: "ns-demo"
+  vaultVariables:
+    # key: "OCID of a VAULT SECRET"
+inputArtifacts:
+- name: sample-kube-yaml
+  type: URL
+  url: https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/application/deployment.yaml
+  location: ${OCI_WORKSPACE_DIR}/ngnix.yaml
+
+steps:
+  - type: Command
+    timeoutInSeconds: 600
+    name: "OKE Deployment"
+    command: |
+      oci ce cluster create-kubeconfig --cluster-id ${OKE_OCID} --file $HOME/.kube/config --region ${REGION} --token-version 2.0.0  --kube-endpoint ${OKE_ENDPOINT_TYPE}
+      export NS_CUSTOM=${NAMESPACE}-`date +%d%m%Y`
+      kubectl get nodes
+       echo """
+        kind: Namespace
+        apiVersion: v1
+        metadata:
+          name: ${NS_CUSTOM}
+        """ > kubens.yaml
+      echo "Creating namespace ${NS_CUSTOM}"
+      kubectl apply -f kubens.yaml
+      kubectl apply -f ${OCI_WORKSPACE_DIR}/ngnix.yaml -n ${NS_CUSTOM}
+
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handled Failure"
+        timeoutInSeconds: 40
