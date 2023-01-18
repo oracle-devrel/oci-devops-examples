@@ -1,0 +1,6 @@
+{
+  "dataSourceType" : "ORACLE_OBJECT_STORAGE",
+  "bucketName" : "BUCKET NAME",
+  "namespace" : "NAME SPACE",
+  "objectName" : "demo-training-data.csv"
+}
