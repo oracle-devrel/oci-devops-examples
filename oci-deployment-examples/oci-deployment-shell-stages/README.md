@@ -4,6 +4,8 @@ Sample illustration of OCI DevOps deployment pipeline with *DevOps Deploy Shell 
 ## Deploy Shell Stage
 The shell stage allows you to run custom commands in the deployment pipeline. This stage can be added at any point in the deployment pipeline. You must prepare a command specification YAML file containing all the steps that you want to run during the deployment. The command spec is run on a container instance host in the selected compartment and subnet in your tenancy.
 
+⚠️ - The feature is currently in `limited availability` mode.Please contact your Oracle representative to get it enabled for your tenancy.
+
 ## Key benefits of adding a Shell stage:
 
 - Automate deployments to OCI platforms such as service mesh and container instances using OCI CLI and other pre-installed tools.
