@@ -53,7 +53,8 @@ ALL {resource.type = 'devopsdeploypipeline', resource.compartment.id = 'COMPARTM
 ```java
 Allow dynamic-group  <NAME OF THE DYNAMIC GROUP> to manage virtual-network-family in compartment <NAME OF THE COMPARTMENT> 
 Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to manage ons-topics in compartment <NAME OF THE COMPARTMENT>
-Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to manage all-artifacts in compartment <NAME OF THE COMPARTMENT> 
+Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to manage all-artifacts in compartment <NAME OF THE COMPARTMENT>
+Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to managemanage compute-container-family in compartment <NAME OF THE COMPARTMENT>
 ```
 
 ### OCI DevOps setup
@@ -122,6 +123,7 @@ ALL {resource.type = 'devopsdeploypipeline', resource.compartment.id = 'COMPARTM
 Allow dynamic-group  <NAME OF THE DYNAMIC GROUP> to manage virtual-network-family in compartment <NAME OF THE COMPARTMENT> 
 Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to manage ons-topics in compartment <NAME OF THE COMPARTMENT>
 Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to manage all-artifacts in compartment <NAME OF THE COMPARTMENT>
+Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to managemanage compute-container-family in compartment <NAME OF THE COMPARTMENT>
 Allow dynamic-group <NAME OF THE DYNAMIC GROUP>  to manage cluster-family in compartment <NAME OF THE COMPARTMENT> 
 ```
 
