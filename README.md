@@ -17,6 +17,13 @@ The service also provides private Git repositories to store your code and it sup
 - [⚡ OCI Source Code Management service - sample](./oci-coderepo-examples/README.md)
 - [⚡ OCI Devops Projects,Policies and Groups - sample](./oci-config-examples/README.md)
 
+### Recent samples. 
+
+- 🛎️[Sample illustration of OCI DevOps deployment pipeline with DevOps Deploy Shell stage.]( https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-shell-stages)
+- 🛎️[A sample to run OCI AI Anomaly detection from OCI Build-pipeline.](https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-anomaly-detection)
+- 🛎️[A way (workaround) to execute commands on to a Windows machine using OCI Run command agent from OCI Build pipeline.](https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-connect-to-windows-from-buildmachines)
+- 🛎[Sample illustration of OCI DevOps deployment pipeline with stage level paramters.]( https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-stagelevelparams)
+
 ## All samples (A to Z sorted order)
 
 - [🌟 All the published samples of OCI-devops](AIO.md)
