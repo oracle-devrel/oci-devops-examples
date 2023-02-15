@@ -1,0 +1,102 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+    NVM_VERSION: "v0.39.0"
+  vaultVariables:
+    HELM_REPO_USER: ocid1.vaultsecret.ocX.yyyy.zzzz
+    USER_AUTH_TOKEN: ocid1.vaultsecret.ocX.yyyy.zzzz
+    GPG_PASSPHRASE: ocid1.vaultsecret.ocX.yyy.zzzz
+
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Setup the Environment"
+    timeoutInSeconds: 400
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+      oci artifacts generic artifact download --artifact-id ${GPG_ARTIFACT_OCID} --file ${OCI_PRIMARY_SOURCE_DIR}/private_decoded
+      echo ${GPG_PASSPHRASE} >${OCI_PRIMARY_SOURCE_DIR}/gpg.pass
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Install Node Prereqs"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      # install nvm
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERION}/install.sh | bash
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      nvm install lts/erbium
+      echo "NODE VERSION: $(node -v)"
+      echo "NPM VERSION: $(npm -v)"
+
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+  - type: Command
+    timeoutInSeconds: 600
+    name: "NPM install"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      npm install
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+  - type: Command
+    timeoutInSeconds: 1200
+    name: "Run Tests"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      npm test
+
+  - type: Command
+    timeoutInSeconds: 1200
+    name: "Build container image"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      docker build --pull --rm -t node-express-getting-starter .
+
+  - type: Command
+    timeoutInSeconds: 1200
+    name: "Helm Package & Push"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}/helm/node-service
+      export BUILDRUN_HASH=${BUILDRUN_HASH}
+      originalChartfile="Chart.yaml"
+      tmpChartfile=$(mktemp)
+      cp --attributes-only --preserve $originalChartfile $tmpChartfile
+      cat $originalChartfile | envsubst > $tmpChartfile && mv $tmpChartfile $originalChartfile
+      originalValuesfile="values.yaml"
+      tmpValuesfile=$(mktemp)
+      cp --attributes-only --preserve $originalValuesfile $tmpValuesfile
+      cat $originalValuesfile | envsubst > $tmpValuesfile && mv $tmpValuesfile $originalValuesfile 
+      cat $originalValuesfile
+      helm package --sign --key ${HELM_SIGN_KEY} --keyring ${OCI_PRIMARY_SOURCE_DIR}/private_decoded --passphrase-file ${OCI_PRIMARY_SOURCE_DIR}/gpg.pass .
+      rm -f ${OCI_PRIMARY_SOURCE_DIR}/gpg.pass
+      helm registry login ${HELM_REGISTRY} -u ${HELM_REPO_USER} -p ${USER_AUTH_TOKEN}
+      helm push *.tgz oci://${HELM_REGISTRY}/${HELM_REGISTRY_NAMESPACE}/${HELM_CHART_REPO}
+
+outputArtifacts:
+  - name: APPLICATION_DOCKER_IMAGE
+    type: DOCKER_IMAGE
+    # this location tag doesn't effect the tag used to deliver the container image
+    # to the Container Registry
+    location: node-express-getting-starter:latest
