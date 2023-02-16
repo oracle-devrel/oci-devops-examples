@@ -22,10 +22,17 @@ All about OCI devops deployment samples ..
 <details>
   <summary>Github Action - click to expand</summary>
 
-* [Deploy to OKE with Github actions](.//oci-devops-githubactions-deploy/)
+* [Deploy to OKE with Github actions](./oci-devops-githubactions-deploy/)
 
 </details>
 
+
+<details>
+  <summary>Helm deployments - click to expand</summary>
+
+* [Deploy to OKE using signed helm chart ](./oci-deployment-with-helm-attestation/)
+
+</details>
 
 <details>
   <summary>Kubernetes deployments - click to expand</summary>
@@ -34,6 +41,21 @@ All about OCI devops deployment samples ..
 * [Invoke deployment pipeline on a container image upload](./oci-devops-deploy-on-imageupload/)
 
 </details>
+
+<details>
+  <summary>Shell stages - click to expand</summary>
+
+* [Using shell stages with deployment pipeline](./oci-deployment-shell-stages/)
+
+</details>
+
+<details>
+  <summary>Set Stage level parameters - click to expand</summary>
+
+* [Set Stage level parameters ](./oci-deployment-stagelevelparams/)
+
+</details>
+
 
 ### Back to examples.
 ----
