@@ -1,0 +1,70 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+  vaultVariables:
+  #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+    - STATIC_IMAGE_TAG
+    - OBJECT_BUCKET_NAME
+    - OBJECT_NAMESPACE
+
+steps:
+  - type: Command
+    name: "Define unique image tag"
+    timeoutInSeconds: 40
+    command: |
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+      export STATIC_IMAGE_TAG=${IMAGE_STATIC_TAG}
+      export OBJECT_BUCKET_NAME=${BUCKET_NAME}
+      export OBJECT_NAMESPACE=${NAMESPACE_NAME}
+
+  - type: Command
+    timeoutInSeconds: 1200
+    name: "Build container image"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      cd python_app
+      docker build --pull --rm -t python_fast_app .    
+
+  - type: Command
+    timeoutInSeconds: 6000
+    name: "Upload Terraform config"
+    command: |
+      cd ${OCI_PRIMARY_SOURCE_DIR}
+      cd terraform
+      cat variables.tf | envsubst >variables.tf_tmp
+      cp variables.tf_tmp variables.tf
+      cat remote-backend_template.tf| envsubst > remote-backend_template.tf_tmp
+      cp remote-backend_template.tf_tmp remote-backend_template.tf
+      rm remote-backend_template.tf_tmp
+      rm variables.tf_tmp
+      oci os object bulk-upload -ns ${NAMESPACE_NAME} -bn ${BUCKET_NAME} --src-dir ${OCI_PRIMARY_SOURCE_DIR}/terraform --overwrite --region ${REGION} --content-type auto --prefix devops_
+     
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 40
+        runAs: root
+
+
+outputArtifacts:
+  - name: python_app_dockerimage
+    type: DOCKER_IMAGE
+    location: python_fast_app:latest
+
+  - name: command_spec
+    type: BINARY
+    location: ${OCI_PRIMARY_SOURCE_DIR}/command_spec.yaml

@@ -30,6 +30,7 @@
 - Sample illustration of OCI DevOps deployment pipeline with *STAGE LEVEL PARAMETERS* - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-stagelevelparams
 - Sample illustration of OCI DevOps deployment pipeline with DevOps Deploy Shell stage - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-shell-stages
 - Sample illustration of OCI Devops deployment pipeline to update the deployment environment - Instances dynamically - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-instance-env-dynamic-update
+- Sample illustration of deployment on to *OCI Container instance* using OCI DevOps. https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-deploy-containerinstance
 - Sample illustration of verifying the *integrity of Helm chart*  before the deployment https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-with-helm-attestation
 - Scanning code for vulnerabilities for Maven packages - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-vulnerability-audit-management
 - Trigger build-pipeline from OCI Code repo on file modifications . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-filebasedtrigger

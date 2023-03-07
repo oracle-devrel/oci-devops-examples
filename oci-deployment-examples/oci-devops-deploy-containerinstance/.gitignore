@@ -1,0 +1,54 @@
+# General
+**/.DS_Store
+.AppleDouble
+.LSOverride
+.idea
+tmp
+
+oci-devops-instances-with-graal/*
+oci-devops-instances-with-graal
+oci-devops-graal-micronaut-deploy-to-instances/*
+oci-devops-graal-micronaut-deploy-to-instances
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+*.zip*
+*.tfvars
+*.out
+plan.json
+
+# terraform lock file
+**/.terraform.lock.hcl
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# ignore common security keys
+*.key
+*.crt
+*.csr
+*.pem

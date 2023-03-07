@@ -1,0 +1,71 @@
+version: 0.1
+component: command
+timeoutInSeconds: 10000
+shell: bash
+failImmediatelyOnError: true
+env:
+  variables:
+
+  vaultVariables:
+    aws_access_key_id: ocid1.vaultsecret.oc1.us-sanjose-1.amaaaaaayat6pyaai2imzaxryz3txkgik724kh66mahsfq57hirzw4z7zaqq
+    aws_secret_access_key: ocid1.vaultsecret.oc1.us-sanjose-1.amaaaaaayat6pyaaq4skuh5smh2fbevxianlmhrfc36hklvuk7foh5f3z4aa
+
+steps:
+  - type: Command
+    name: TerraformSetup
+    shell: bash
+    timeoutInSeconds: 3500
+    failImmediatelyOnError: true
+    command: |
+      mkdir /tmp/terraform
+      echo "[default]" > /tmp/terraform/cred_store
+      echo "aws_access_key_id=${aws_access_key_id}">>/tmp/terraform/cred_store
+      echo "aws_secret_access_key=${aws_secret_access_key}">>/tmp/terraform/cred_store
+      oci os object bulk-download -ns ${OBJECT_NAMESPACE} -bn ${OBJECT_BUCKET_NAME} --download-dir /tmp/terraform --prefix devops_ --include '*.tf'
+      ls -ltr /tmp/terraform
+
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 400
+
+  - type: Command
+    name: ApplyTerraform
+    shell: bash
+    timeoutInSeconds: 3500
+    failImmediatelyOnError: true
+    command: |
+      cd /tmp/terraform
+      terraform version
+      mv *_remote-backend_template.tf remote-backend_template.tf
+      terraform init -migrate-state -upgrade
+      echo "Attempting to apply with version ${BUILDRUN_HASH} ..."
+      terraform apply --auto-approve
+      ci_host_ocid=`terraform output container_instance_id`
+      echo "Restarting container instance ${ci_host_ocid}"
+      oci container-instances container-instance restart --container-instance-id ${ci_host_ocid}
+      sleep 20
+
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 400
+
+  - type: Command
+    name: RestartCInstanceHost
+    shell: bash
+    timeoutInSeconds: 3500
+    failImmediatelyOnError: true
+    command: |
+      cd /tmp/terraform
+
+    onFailure:
+      - type: Command
+        command: |
+          echo "Handling Failure"
+          echo "Failure successfully handled"
+        timeoutInSeconds: 400
