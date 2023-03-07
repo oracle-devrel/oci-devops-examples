@@ -234,6 +234,15 @@ outputArtifacts:
 
 - The terraform state is managed by the object storage, once it's removed or any alteration, the terraform actions will also be changed accordingly.
 
+### Cleanup of the resources.
+
+- Delete OCI devops project using `cascade deletion` option.
+- Remove the content and bucket of OCI Object storage.
+- Delete the OCI Container instance.
+- Remove the artifacts and delete artifact and container registry repos.
+- Clean up the devops logs /policies /dynamic group as accordingly.
+
+
 Read more
 ----
 
