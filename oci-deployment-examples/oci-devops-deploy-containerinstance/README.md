@@ -250,8 +250,9 @@ Read more
 - OCI Reference architectures  -  https://docs.oracle.com/solutions/
 - OCI DevOps samples - https://github.com/oracle-devrel/oci-devops-examples
 - OCI DevOps shell stages - https://docs.oracle.com/en-us/iaas/Content/devops/using/shell_stage.htm
-  Contributors
-  ===========
+  
+Contributors
+===========
 
 - Author: Rahul M R.
 - Collaborators  : NA
