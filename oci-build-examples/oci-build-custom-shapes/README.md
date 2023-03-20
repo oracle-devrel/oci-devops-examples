@@ -4,8 +4,8 @@
 The feature enables developers to select their preferred CPU and memory for their managed build stage.
 
    ```
-   $ git init oni-build-custom-shapes
-   $ cd ooci-build-custom-shapes
+   $ git init oci-build-custom-shapes
+   $ cd oci-build-custom-shapes
    $ git remote add origin <url to this git repo>
    $ git config core. sparse checkout true
    $ echo "oci-build-examples/oci-build-custom-shapes/*">>.git/info/sparse-checkout
