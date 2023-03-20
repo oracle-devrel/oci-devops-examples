@@ -1,6 +1,13 @@
 All about OCI devops build samples ..
 =======
 <details>
+  <summary>Anomaly detections - click to expand</summary>
+
+* [Anomaly detection from buildpipeline](./oci-devops-anomaly-detection/)
+
+</details>
+
+<details>
   <summary>Build Caching - click to expand</summary>
 
 * [Speed up builds with caching](./oci-build-caching/)
@@ -17,6 +24,13 @@ All about OCI devops build samples ..
   <summary>Compute Agents executions  - click to expand</summary>
 
 * [Run commands on WINDOWS host from build pipeline](./oci-devops-connect-to-windows-from-buildmachines/)
+
+
+</details>
+<details>
+  <summary>Custom shaped Build runner  - click to expand</summary>
+
+* [Use custom shape build runner machine](./oci-build-custom-shapes/)
 
 
 </details>

@@ -8,11 +8,11 @@ Objective
 - Make an executive decision based on the anomaly results.
 
    ```
-   $ git init oci-DevOps-anomaly-detection
+   $ git init oci-devops-anomaly-detection
    $ cd oci-devops-anomaly-detection
    $ git remote add origin <url to this git repo>
    $ git config core. sparse checkout true
-   $ echo "oci-build-examples/ooci-devops-anomaly-detection/*">>.git/info/sparse-checkout
+   $ echo "oci-build-examples/oci-devops-anomaly-detection/*">>.git/info/sparse-checkout
    $ git pull --depth=1 origin main
 
    ```
@@ -34,9 +34,9 @@ ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = 'OCID OF Y
 
 ```java
 allow any-user to manage ai-service-anomaly-detection-family in compartment <NAME OF YOUR COMPARTMENT>
-allow any user to manage object-family in compartment <NAME OF YOUR COMPARTMENT>
-Allow dynamic-group <DYNAMIC GROUP NAME> to manage objects in compartment <NAME OF YOUR COMPARTMENT>
-Allow dynamic-group <DYNAMIC GROUP NAME> to manage ai-service-anomaly-detection-family in tenancy
+        allow any user to manage object-family in compartment <NAME OF YOUR COMPARTMENT>
+        Allow dynamic-group <DYNAMIC GROUP NAME> to manage objects in compartment <NAME OF YOUR COMPARTMENT>
+        Allow dynamic-group <DYNAMIC GROUP NAME> to manage ai-service-anomaly-detection-family in tenancy
 ```
 
 ### OCI Object storage setup
@@ -117,38 +117,38 @@ Allow dynamic-group <DYNAMIC GROUP NAME> to manage ai-service-anomaly-detection-
 
 ```java
 steps:
-  - type: Command
-    timeoutInSeconds: 6000
-    name: "Run Anomaly Detection"
-    command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}
-      cd ai-data-references
-      oci anomaly-detection model detect-anomalies-inline --model-id ${MODEL_OCID} --data file://data.json --signal-names file://signal-names.json >output.json
-      counter=`cat output.json|grep -w anomalies`
-      if [[ ${counter} != 0 ]]
-      then
-      echo "Found Anomalies"
-      cat output.json
-      exit
-      fi
-      echo "No anomalies"
+        - type: Command
+        timeoutInSeconds: 6000
+        name: "Run Anomaly Detection"
+        command: |
+        cd ${OCI_PRIMARY_SOURCE_DIR}
+        cd ai-data-references
+        oci anomaly-detection model detect-anomalies-inline --model-id ${MODEL_OCID} --data file://data.json --signal-names file://signal-names.json >output.json
+        counter=`cat output.json|grep -w anomalies`
+        if [[ ${counter} != 0 ]]
+        then
+        echo "Found Anomalies"
+        cat output.json
+        exit
+        fi
+        echo "No anomalies"
 
-    onFailure:
+        onFailure:
 ```
 
 - The detection is running against the file [data. json](./ai-data-references/data.json)
 
 ```java
 [
-  {
-    "timestamp": "2020-07-13T20:44:46Z",
-    "values": [ 9.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
-  },
-  {
-    "timestamp": "2020-07-13T20:45:46Z",
-    "values": [ 0.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
-  }
-]
+        {
+        "timestamp": "2020-07-13T20:44:46Z",
+        "values": [ 9.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
+        },
+        {
+        "timestamp": "2020-07-13T20:45:46Z",
+        "values": [ 0.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
+        }
+        ]
 ```
 
 - Refer to the OCI Labs mentioned getting more information about the JSON and methodologies used here.
@@ -166,15 +166,15 @@ steps:
 
 ```java
 [
-  {
-    "timestamp": "2020-07-13T20:44:46Z",
-    "values": [ 0.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
-  },
-  {
-    "timestamp": "2020-07-13T20:45:46Z",
-    "values": [ 0.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
-  }
-]
+        {
+        "timestamp": "2020-07-13T20:44:46Z",
+        "values": [ 0.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
+        },
+        {
+        "timestamp": "2020-07-13T20:45:46Z",
+        "values": [ 0.4713, 1, 0.5479, 1.291, 0.8059, 1.393, 0.0293, 0.1541, 0.2611,0.4098]
+        }
+        ]
 ```
 - Push the changes back to the code repo. This time the build run will get triggered automatically as we set up the DevOps trigger in the previous DevOps section.
 
