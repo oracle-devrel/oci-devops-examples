@@ -1,0 +1,45 @@
+version: 0.1
+component: build
+timeoutInSeconds: 6000
+runAs: root
+shell: bash
+env:
+  # these are local variables to the build config
+  variables:
+
+  # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
+  # you can then access the value of that secret in your build_spec.yaml commands
+  vaultVariables:
+  #  EXAMPLE_SECRET: "YOUR-SECRET-OCID"
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Fetch Values"
+    timeoutInSeconds: 240
+    command: |
+      echo "OCI_BUILD_RUN_ID => ${OCI_BUILD_RUN_ID}"
+      echo "OCI_TRIGGER_COMMIT_HASH => ${OCI_TRIGGER_COMMIT_HASH}"
+      echo "OCI_STAGE_ID =>${OCI_STAGE_ID}" 
+      echo "OCI_BUILD_RUN_ID=>${OCI_BUILD_RUN_ID}"
+      echo "OCI_TRIGGER_SOURCE_BRANCH_NAME =>${OCI_TRIGGER_SOURCE_BRANCH_NAME} "
+      echo "OCI_TRIGGER_SOURCE_URL =>${OCI_TRIGGER_SOURCE_URL} "
+      echo "OCI_TRIGGER_EVENT_TYPE =>${OCI_TRIGGER_EVENT_TYPE} "
+      echo "OCI_PRIMARY_SOURCE_DIR =>${OCI_PRIMARY_SOURCE_DIR} "
+      echo "OCI_WORKSPACE_DIR	=> ${OCI_WORKSPACE_DIR} "
+      echo "OCI_PRIMARY_SOURCE_NAME => ${OCI_PRIMARY_SOURCE_NAME} "
+      echo "OCI_BUILD_STAGE_NAME => ${OCI_BUILD_STAGE_NAME}"
+      echo "Use a custom value from predefined system variable to expose outside of the current build stage.."
+      export BUILDRUN_HASH =`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      if [ -z ${OCI_TRIGGER_COMMIT_HASH} ] 
+      then 
+          cd ${OCI_PRIMARY_SOURCE_DIR}
+          export OCI_TRIGGER_COMMIT_HASH=`git log --format="%H" -n 1|cut -c 1-7`
+      fi
+      echo "OCI_TRIGGER_COMMIT_HASH	=>${OCI_TRIGGER_COMMIT_HASH}"
+
+  # Last command is used to get the commit hash using GIT ID ,its a hack while there wont be any default commit hash by manual Run.
+  # Until its fixed we can fetch the same via GIT Command.

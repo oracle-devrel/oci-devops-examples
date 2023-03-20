@@ -1,5 +1,6 @@
 ## All in One reference for samples - In Alphabetical (A to Z) order.
 - A sample to run OCI AI Anomaly detection from OCI Build-pipeline - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-anomaly-detection
+- A sample to use `Custom Shapes` within OCI Build pipelines - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-custom-shapes
 - A way (workaround) to execute commands on to a Windows machine using OCI Run command agent from OCI Build pipeline. - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-connect-to-windows-from-buildmachines
 - Access resource with Private IP from OCI Build runner - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-pa-with-private-oke
 - Build Caching - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-caching

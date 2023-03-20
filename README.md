@@ -11,7 +11,7 @@ The service also provides private Git repositories to store your code and it sup
 
 ## OCI Devops examples (Catogorical view )
 
-- [⚡ CICD with OCI Devops services - samples](./oci-pipeline-examples/README.md)         
+- [⚡ CICD with OCI Devops services - samples](./oci-pipeline-examples/README.md)        
 - [⚡ OCI Devops Build service - samples](./oci-build-examples/README.md) 
 - [⚡ OCI Devops Deployment service - samples](./oci-deployment-examples/README.md) 
 - [⚡ OCI Source Code Management service - sample](./oci-coderepo-examples/README.md)
@@ -21,7 +21,7 @@ The service also provides private Git repositories to store your code and it sup
 - 🛎[Sample illustration of deployment on to *OCI Container instance* using OCI DevOps.]( https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-deploy-containerinstance
   )
 - 🛎️[Sample illustration of verifying the *integrity of Helm chart* before the deployment](https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-with-helm-attestation)
-- 🛎️[Sample illustration of OCI DevOps deployment pipeline with DevOps Deploy Shell stage.]( https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-shell-stages)
+- 🛎️[A sample to use `Custom Shapes` within OCI Build pipelines]( https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-custom-shapes)
 - 🛎️[A sample to run OCI AI Anomaly detection from OCI Build-pipeline.](https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-anomaly-detection)
 
 
