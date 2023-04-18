@@ -63,6 +63,7 @@ Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to use instance-agent-command-exe
 Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to manage objects in compartment <YOUR_COMPARTMENT_NAME>    
 Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to manage objects in compartment <YOUR_COMPARTMENT_NAME>
 Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to manage all-artifacts in compartment <YOUR_COMPARTMENT_NAME>
+Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to read instance-family in compartment <YOUR_COMPARTMENT_NAME>
 ```
 
 ### Create an artifact repo.
