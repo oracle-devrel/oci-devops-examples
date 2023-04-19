@@ -59,11 +59,11 @@ All {instance.compartment.id = '<YOUR_COMPARMENT_OCID>'}
 ```java
 Allow dynamic-group <YOUR_DynamicGroup_NAME-1> to read secret-family in compartment <YOUR_COMPARTMENT_NAME>
 Allow dynamic-group <YOUR_DynamicGroup_NAME-1> to manage ons-topics in compartment <YOUR_COMPARTMENT_NAME>
-Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to use instance-agent-command-execution-family in compartment <YOUR_COMPARTMENT_NAME>
-Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to manage objects in compartment <YOUR_COMPARTMENT_NAME>    
+Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to use instance-agent-command-execution-family in compartment <YOUR_COMPARTMENT_NAME> 
 Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to manage objects in compartment <YOUR_COMPARTMENT_NAME>
 Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to manage all-artifacts in compartment <YOUR_COMPARTMENT_NAME>
-Allow dynamic-group <YOUR_DynamicGroup_NAME-2> to read instance-family in compartment <YOUR_COMPARTMENT_NAME>
+Allow dynamic-group <YOUR_DynamicGroup_NAME-1> to read instance-family in compartment <YOUR_COMPARTMENT_NAME>
+Allow dynamic-group <YOUR_DynamicGroup_NAME-1> to read vnics in compartment <YOUR_COMPARTMENT_NAME>
 ```
 
 ### Create an artifact repo.
