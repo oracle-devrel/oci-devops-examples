@@ -74,7 +74,8 @@ ALL {resource.type = 'devopsrepository', resource.compartment.id = 'COMPARMENT O
 - Create a policy (Ensure to create it under the ROOT of tenancy) for the dynamic groups with below policy statement.
 
 ```
-Allow dynamic-group mr-devops-policy-checker-dg-connection to read secret-family in compartment <compartment name>
+Allow dynamic-group <NAME OF THE DG> to read secret-family in compartment <compartment name>
+Allow dynamic-group <NAME OF THE DG> to use devops-connection in compartment <compartment name>
 
 ```
 

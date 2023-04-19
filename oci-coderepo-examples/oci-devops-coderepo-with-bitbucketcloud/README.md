@@ -69,8 +69,9 @@ ALL {resource.type = 'devopsrepository', resource.compartment.id = 'COMPARMENT O
 - Create a policy (Ensure to create it under the ROOT of tenancy) for the dynamic groups with the below policy statement.
 
 ```
-Allow dynamic-group mr-devops-policy-checker-dg-connection to read secret-family in compartment <compartment name>
-Allow dynamic-group mr-devops-policy-checker-dg-connection to use ons-topics in compartment <compartment name>
+Allow dynamic-group <NAME OF THE DG> to read secret-family in compartment <compartment name>
+Allow dynamic-group <NAME OF THE DG>  to use ons-topics in compartment <compartment name>
+Allow dynamic-group <NAME OF THE DG>  to use devops-connection in compartment <compartment name>
 ```
 
 - Create a notification topic, that will be used for DevOps - https://docs.oracle.com/en-us/iaas/Content/Notification/Tasks/managingtopicsandsubscriptions.htm#createTopic
