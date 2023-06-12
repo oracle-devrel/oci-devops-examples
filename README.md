@@ -29,6 +29,10 @@ The service also provides private Git repositories to store your code and it sup
 
 - [🌟 All the published samples of OCI-devops](AIO.md)
 
+## Use OCI Code Editor to Open the repo.
+
+[<img src=“https://github.com/oracle-devrel/oci-code-editor-samples/blob/pre-prod/images/open-in-code-editor.png”/>](https://cloud.oracle.com/?region=home&cs_repo_url=https://github.com/oracle-devrel/oci-devops-examples.git&cs_open_ce=true&cs_readme_path=README.md&cs_branch=main)
+
 ## Instruction to clone a specific example.
 
 ```
