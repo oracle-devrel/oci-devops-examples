@@ -29,7 +29,15 @@ The service also provides private Git repositories to store your code and it sup
 
 - [🌟 All the published samples of OCI-devops](AIO.md)
 
-## Instruction to clone a specific example.
+## How to Use the repo.
+
+### Option 1 -  Use OCI Code Editor to Open the repo & Switch to Individual readme for details.
+
+
+  [![name](images/open-in-code-editor.png)](https://cloud.oracle.com/?region=home&cs_repo_url=https://github.com/oracle-devrel/oci-devops-examples.git&cs_open_ce=true&cs_readme_path=README.md&cs_branch=main)
+
+
+### Option -2 - Clone Individual samples and follow.
 
 ```
     $ git init <foldername> 
