@@ -1,14 +1,14 @@
-# Using GraalVM Enterprise in OCI DevOps to build a Micronaut REST App
+# Using Oracle GraalVM in OCI DevOps to build a Micronaut REST App
 
-This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps build pipelines` to build a simple Micronaut hello world REST application. You can use this approach to build any high-performance Java application with Micronaut, GraalVM Enterprise and OCI DevOps.
+This sample shows how to use `Oracle GraalVM` in `OCI DevOps build pipelines` to build a simple Micronaut hello world REST application. You can use this approach to build any high performance Java application with Micronaut, Oracle GraalVM and OCI DevOps.
 
 ## What is GraalVM?
 
-- Oracle GraalVM Enterprise is a high-performance JDK distribution that can accelerate any Java workload running on the HotSpot JVM.
+- GraalVM is a high performance JDK distribution that can accelerate any Java workload running on the HotSpot JVM.
 
-- Oracle GraalVM Enterprise Native Image ahead-of-time compilation enables you to build lightweight Java applications that are smaller, faster, and use less memory and CPU. At build time, GraalVM Native Image analyzes a Java application and its dependencies to identify just what classes, methods, and fields are necessary and generates optimized machine code for just those elements.
+- GraalVM Native Image ahead-of-time compilation enables you to build lightweight Java applications that are smaller, faster, and use less memory and CPU. At build time, GraalVM Native Image analyzes a Java application and its dependencies to identify just what classes, methods, and fields are necessary and generates optimized machine code for just those elements.
 
-- Oracle GraalVM Enterprise Edition is available for use on Oracle Cloud Infrastructure (OCI) at no additional cost.
+- Oracle GraalVM is available for use on Oracle Cloud Infrastructure (OCI) at no additional cost.
 
 ## What is Micronaut
 
@@ -32,7 +32,7 @@ This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps 
 ## Objectives
 
 - Create an OCI build pipeline.
-- Make a build using Oracle GraalVM Enterprise Edition.
+- Make a build using Oracle GraalVM.
 - Here the focus will be on the build specification and DevOps build pipeline
 
 
@@ -82,6 +82,7 @@ Allow dynamic-group  <YOUR_DynamicGroup_NAME> to use ons-topics in compartment <
 ![](images/oci_buildpipeline_managedbuild.png)
 
 - Click `Next` and provide the details.
+- In the `Build spec file path`, enter `build_spec.yaml` to use the [GraalVM Enterprise 22.x Java 17 build spec](build_spec.yaml). Alternatively, you can enter `build_spec_oracle_graalvm_jdk17.yaml` to use the [Oracle GraalVM for JDK 17 build spec](./build_spec_oracle_graalvm_jdk17.yaml) or `build_spec_oracle_graalvm_jdk20.yaml` to use the [Oracle GraalVM for JDK 20 build spec](./build_spec_oracle_graalvm_jdk20.yaml).
 
 ![](images/oci_buildstage_1.png)
 
@@ -96,14 +97,14 @@ Allow dynamic-group  <YOUR_DynamicGroup_NAME> to use ons-topics in compartment <
 
 ## Take a closer look at the build instructions below
 
-To install and use GraalVM Enterprise with Micronaut REST in the DevOps build pipeline, the build specification file is as follows:
+To install and use Oracle GraalVM with Micronaut REST in the DevOps build pipeline, the build specification file is as follows:
 
-1. Add the following command to install one or more required GraalVM Enterprise components. For example, this command installs Native Image along with the Java Development Kit (JDK) and other necessary dependencies.
+1. Add the following command to install the required Oracle GraalVM components. For example, this command installs Native Image along with the Java Development Kit (JDK) and other necessary dependencies.
 
     ```shell
     steps:
       - type: Command
-        name: "Install GraalVM Enterprise 22.x Native Image for Java17"
+        name: "Install Oracle GraalVM Enterprise 22.x Native Image for Java17"
         command: |
           yum -y install graalvm22-ee-17-native-image
     ```
@@ -170,7 +171,9 @@ To install and use GraalVM Enterprise with Micronaut REST in the DevOps build pi
         type: DOCKER_IMAGE
         location: ${TAG}
     ```
-Here's the complete [build specification](build_spec.yaml) file.
+Here's the complete [build specification for GraalVM Enterprise 22.x Java 17](build_spec.yaml) file. Alternatively, you can use the 
+[build specification for Oracle GraalVM for JDK 17](./build_spec_oracle_graalvm_jdk17.yaml) or
+[build specification for Oracle GraalVM for JDK 20](./build_spec_oracle_graalvm_jdk20.yaml).
 
 
 ## How to export the executable file outside of the build pipeline stage.
@@ -338,9 +341,9 @@ You can create an OCI Container registry and push the build container image whic
 References
 ==========
 
-- Using GraalVM Enterprise in DevOps Build Pipelines - https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm
+- Using Oracle GraalVM in DevOps Build Pipelines - https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm
 - Oracle Cloud Infrastructure DevOps - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm
-- Oracle Graal VM Enterprise - https://www.oracle.com/java/graalvm/
+- Oracle GraalVM - https://www.oracle.com/java/graalvm/
 
 Contributors
 ===========

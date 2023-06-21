@@ -1,0 +1,54 @@
+version: 0.1
+component: build
+timeoutInSeconds: 900
+runAs: root
+shell: bash
+env:
+  variables:
+    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm-java17"
+    # PATH is a reserved variable and cannot be defined as a variable.
+    # However, PATH can be changed in a build step and the change is visible in subsequent steps.
+    TAG: "mn-hello-ni:0.0.1"
+    APP_FILE: "MnHelloRest"
+
+  # exportedVariables are made available to use as parameters in sucessor Build Pipeline stages
+  # For this Build to run, the Build Pipeline needs to have a BUILDRUN_HASH parameter set
+  exportedVariables:
+    - BUILDRUN_HASH
+
+steps:
+  - type: Command
+    name: "Define unique image tag"
+    timeoutInSeconds: 140
+    command: |
+      echo "OCI_BUILD_RUN_ID: ${OCI_BUILD_RUN_ID}"
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+  - type: Command
+    name: "Install Oracle GraalVM for JDK 17 (Native Image and JDK)"
+    command: |
+      yum -y install graalvm-17-native-image
+  - type: Command
+    name: "Set PATH Variable."
+    command: |
+      export PATH=$JAVA_HOME/bin:$PATH
+  - type: Command
+    name: "Build a native executable"
+    command: |
+      ./mvnw --no-transfer-progress package -Dpackaging=native-image
+  - type: Command
+    name: "Build a container image with Native executable"
+    command: |
+      docker build -f ./Dockerfile \
+                  --build-arg APP_FILE=${APP_FILE} \
+                  -t ${TAG} .
+outputArtifacts:
+  - name: app_native_executable
+    type: BINARY
+    location: target/MnHelloRest
+  - name: runtime_image
+    type: DOCKER_IMAGE
+    # this is only the locally exported container image name
+    # this location tag doesn't affect the tag used to deliver the container image
+    # to the Container Registry.
+    location: ${TAG}
