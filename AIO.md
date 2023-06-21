@@ -9,8 +9,8 @@
 - Build and Deploy a Golang application using OCI Devops - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-golan-sample
 - Build and Deploy a RUST application using OCI Devops - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-cicd-rust-sample
 - Build and deploy a JAVA - Graal EE - Micronaut application on to Instances - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-devops-graal-micronaut-deploy-to-instances
-- Build and run a OCI devops pipeline with JAVA and Graal VM framework. - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-java-graalvm-devops-example
-- Build and run a OCI devops pipeline with Java-Micronaut framework. - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-java-micronaut-devops-example
+- Build and run a OCI devops pipeline with JAVA and GraalVM - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-java-graalvm-devops-example
+- Build and run a OCI devops pipeline with Java-Micronaut framework - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-java-micronaut-devops-example
 - Cascade delete of OCI Project  - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-config-examples/oci-project-cascadedelete
 - Cascaded Pipelines - With in the Region - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-pipeline-examples/oci-cascaded-pipelines/same-region
 - Container image scan before deploy - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci_imagescan_before_deploy

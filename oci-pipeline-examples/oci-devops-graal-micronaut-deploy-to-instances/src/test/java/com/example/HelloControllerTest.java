@@ -23,7 +23,7 @@ public class HelloControllerTest {
         String body = client.toBlocking().retrieve(request);
 
         assertNotNull(body);
-        assertEquals("With Love from OCI Devops - Powered by Graal Enterprise!", body);
+        assertEquals("With Love from OCI Devops - Powered by Oracle GraalVM!", body);
     }
     @Test
     public void testHelloName() {

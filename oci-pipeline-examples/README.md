@@ -7,9 +7,9 @@ All about devops pipelines using OCI Devops.
 
 </details>
 <details>
-<summary> Pipeline with Graal Enterprise - click to expand</summary>
+<summary> Pipeline with Oracle GraalVM - click to expand</summary>
 
-* [Build and deploy a JAVA - Graal EE - Micronaut application on to Instances](./oci-devops-graal-micronaut-deploy-to-instances)
+* [Build and deploy a JAVA - GraalVM - Micronaut application on to Instances](./oci-devops-graal-micronaut-deploy-to-instances)
 
 </details>
 <details>
@@ -24,7 +24,7 @@ All about devops pipelines using OCI Devops.
   
 * [Build and run a OCI devops pipeline with Java-Micronaut framework on to OKE.](./oci-java-micronaut-devops-example/)
 
-* [Build and run a OCI devops pipeline with JAVA and Graal VM framework on to OKE .](./oci-java-graalvm-devops-example/)
+* [Build and run a OCI devops pipeline with JAVA and GraalVM on to OKE.](./oci-java-graalvm-devops-example/)
 
 </details>
 

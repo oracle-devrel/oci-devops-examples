@@ -1,14 +1,14 @@
-# Using GraalVM Enterprise in OCI DevOps to build and Deploy a Micronaut REST App on to OCI Instances
+# Using Oracle GraalVM in OCI DevOps to build and Deploy a Micronaut REST App on to OCI Instances
 
-This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps build pipelines` to build a simple Micronaut hello world REST application. The application will be then deployed to OCI Instances.
+This sample shows how to use `Oracle GraalVM` in `OCI DevOps build pipelines` to build a simple Micronaut hello world REST application. The application will be then deployed to OCI Instances.
 
 ## What is GraalVM?
 
-- Oracle GraalVM Enterprise is a high-performance JDK distribution that can accelerate any Java workload running on the HotSpot JVM.
+- GraalVM is a high performance JDK distribution that can accelerate any Java workload running on the HotSpot JVM.
 
-- Oracle GraalVM Enterprise Native Image ahead-of-time compilation enables you to build lightweight Java applications that are smaller, faster, and use less memory and CPU. At build time, GraalVM Native Image analyzes a Java application and its dependencies to identify just what classes, methods, and fields are necessary and generates optimized machine code for just those elements.
+- GraalVM Native Image ahead-of-time compilation enables you to build lightweight Java applications that are smaller, faster, and use less memory and CPU. At build time, GraalVM Native Image analyzes a Java application and its dependencies to identify just what classes, methods, and fields are necessary and generates optimized machine code for just those elements.
 
-- Oracle GraalVM Enterprise Edition is available for use on Oracle Cloud Infrastructure (OCI) at no additional cost.
+- Oracle GraalVM is available for use on Oracle Cloud Infrastructure (OCI) at no additional cost.
 
 ## What is Micronaut
 
@@ -32,7 +32,7 @@ This sample shows how to use `Oracle GraalVM Enterprise Edition` in `OCI DevOps 
 ## Objectives
 
 - Create an OCI Build / Deploy pipeline.
-- Build and deploy a Graal VM Enterprise - Micronaut application on an OCI VM.
+- Build and deploy an Oracle GraalVM - Micronaut application on an OCI VM.
 
 
 ## Procedure to use this illustration.
@@ -446,9 +446,9 @@ Clean all these resources via OCI Console .
 References
 ==========
 
-- Using GraalVM Enterprise in DevOps Build Pipelines - https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm
+- Using Oracle GraalVM in DevOps Build Pipelines - https://docs.oracle.com/en-us/iaas/Content/devops/using/graalvm.htm
 - Oracle Cloud Infrastructure DevOps - https://docs.oracle.com/en-us/iaas/Content/devops/using/home.htm
-- Oracle Graal VM Enterprise - https://www.oracle.com/java/graalvm/
+- Oracle GraalVM - https://www.oracle.com/java/graalvm/
 
 Contributors
 ===========
