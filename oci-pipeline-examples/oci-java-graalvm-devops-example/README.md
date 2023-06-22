@@ -1,4 +1,4 @@
-Sample illustration of build and deploy a polyglot application with Graal VM and  OCI Devops.
+Sample illustration of build and deploy a polyglot application with GraalVM and  OCI Devops.
 
 -------
 
@@ -6,7 +6,7 @@ Target Audiences : Intermediate/Advanced towards OCI
 
 🪄 Objective .
 
-- Make a sample build and deploy using Polyglot application with Graal VM.
+- Make a sample build and deploy using Polyglot application with GraalVM.
 - Its encomposed with nodejs and R application language.
 - the build and Deployment is orchestrated with OCI devops services .
 - The application will be deployed on to OCI OKE.

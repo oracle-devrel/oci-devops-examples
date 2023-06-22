@@ -10,7 +10,7 @@ public class HelloController {
     @Get 
     @Produces(MediaType.TEXT_PLAIN) 
     public String index() {
-        return "With Love from OCI Devops - Powered by Graal Enterprise!";
+        return "With Love from OCI Devops - Powered by Oracle GraalVM!";
     }
 
     @Get ("/{name}")

@@ -36,10 +36,10 @@ All about OCI devops build samples ..
 </details>
 
 <details>
-  <summary>Graal VM Enterprise - click to expand</summary>
+  <summary>Oracle GraalVM - click to expand</summary>
 
-* [Build a native executable application with Graal VM Enterprise](./oci_devops_build_with_graalenterprise/)
-* [Build a micronaut restapi application with Graal VM Enterprise](./oci_devops_graalee_micronaut/)
+* [Build a native executable application with Oracle GraalVM](./oci_devops_build_with_graalenterprise/)
+* [Build a micronaut restapi application with Oracle GraalVM](./oci_devops_graalee_micronaut/)
 
 </details>
 
