@@ -78,6 +78,7 @@ Allow dynamic-group <NAME OF THE DYNAMIC GROUP> to manage compute-container-fami
 ![](images/oci-access-keys.png)
 
 - Make a note of these secrets OCID
+- Update the file [command_spec.yaml](command_spec.yaml) with the OCID against the vault variables `aws_access_key_id` and `aws_secret_access_key`.
 
 ### OCI Object storage bucket.
 
