@@ -17,22 +17,10 @@ The service also provides private Git repositories to store your code and it sup
 - [⚡ OCI Source Code Management service - sample](./oci-coderepo-examples/README.md)
 - [⚡ OCI Devops Projects,Policies and Groups - sample](./oci-config-examples/README.md)
 
-### Recent samples. 
-- 🛎[Sample illustration of deployment on to *OCI Container instance* using OCI DevOps.]( https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-deploy-containerinstance
-  )
-- 🛎️[Sample illustration of verifying the *integrity of Helm chart* before the deployment](https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-deployment-with-helm-attestation)
-- 🛎️[A sample to use `Custom Shapes` within OCI Build pipelines]( https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-build-custom-shapes)
-- 🛎️[A sample to run OCI AI Anomaly detection from OCI Build-pipeline.](https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-anomaly-detection)
-
-
 ## All samples (A to Z sorted order)
-
 - [🌟 All the published samples of OCI-devops](AIO.md)
-
 ## How to Use the repo.
-
 ### Option 1 -  Use OCI Code Editor to Open the repo & Switch to Individual readme for details.
-
 
   [![name](images/open-in-code-editor.png)](https://cloud.oracle.com/?region=home&cs_repo_url=https://github.com/oracle-devrel/oci-devops-examples.git&cs_open_ce=true&cs_readme_path=README.md&cs_branch=main)
 
@@ -75,7 +63,7 @@ A sample to clone a build-sample with oci sonarqube integration.
 This project is open source.  Please submit your contributions by forking this repository and submitting a pull request!  Oracle appreciates any contributions that are made by the open source community.
 
 ## License
-Copyright (c) 2022 Oracle and/or its affiliates.
+Copyright (c) 2023 Oracle and/or its affiliates.
 
 Licensed under the Universal Permissive License (UPL), Version 1.0.
 

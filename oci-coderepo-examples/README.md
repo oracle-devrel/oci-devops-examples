@@ -14,6 +14,7 @@ All about OCI devops coderepo samples ..
 * [Integrate Bitbucket.org repo with OCI Devops .](./oci-devops-coderepo-with-bitbucketcloud/)
 * [Integrate GITHUB.com repo with OCI Devops .](./oci-devops-coderepo-with-github/)
 * [Integrate GITLAB.com repo with OCI Devops .](./oci-devops-coderepo-with-gitlab/)
+* [Trigger Buildpipeline based on GitHub repo updates.](./oci-devops-trigger-from-github-repo)
 
 </details>
 
