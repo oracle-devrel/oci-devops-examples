@@ -22,6 +22,7 @@
 - Deploy using helmchart to an OKE on an artifact upload - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci_helm_function_deployment
 - Deployment with Github actions - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-deployment-examples/oci-devops-githubactions-deploy
 - Devops related policies and groups - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-config-examples/oci-devops-policies-groups
+- How to use variables with managed `build stage` (OCI Build pipeline) or using `shell stage` (OCI Deployment pipeline)  - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-config-examples/oci-devops-variables-shell-buildpiepline
 - Integrate Bitbucket.org repo with OCI Devops . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-with-bitbucketcloud
 - Integrate GITHUB.com repo with OCI Devops . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-with-github
 - Integrate GITLAB.com repo with OCI Devops . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-with-gitlab
@@ -36,3 +37,4 @@
 - Scanning code for vulnerabilities for Maven packages - https://github.com/oracle-devrel/oci-devops-examples/tree/main/oci-build-examples/oci-devops-vulnerability-audit-management
 - Trigger build-pipeline based on GitHub repo file updates. - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-trigger-from-github-repo
 - Trigger build-pipeline from OCI Code repo on file modifications . - https://github.com/oracle-devrel/oci-devops-examples/blob/main/oci-coderepo-examples/oci-devops-coderepo-filebasedtrigger
+  rahulmr_in@rahulmr_in-mac oci-devops-examples % 
