@@ -34,6 +34,11 @@ All about OCI devops build samples ..
 
 
 </details>
+<details>
+<summary>Using environment variables with in managed build stage</summary>
+
+* [Using variables with in managed build stage](../oci-config-examples/oci-devops-variables-shell-buildpiepline)
+</details>
 
 <details>
   <summary>Oracle GraalVM - click to expand</summary>
