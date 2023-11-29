@@ -44,6 +44,7 @@ All about OCI devops deployment samples ..
 
 <details>
   <summary>Shell stages - click to expand</summary>
+  
 * [Using variables with in shell stage](../oci-config-examples/oci-devops-variables-shell-buildpiepline)
 * [Deploy to Container instances using shell stage](./oci-devops-deploy-containerinstance)
 * [Using shell stages with deployment pipeline](./oci-deployment-shell-stages/)
