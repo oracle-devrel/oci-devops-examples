@@ -57,12 +57,12 @@ Allow dynamic-group <NAME OF THE DG FOR BUILD PIPELINE> to manage objects in com
 Allow dynamic-group <NAME OF THE DG FOR BUILD PIPELINE> to manage ons-topics in compartment <NAME OF THE COMPARTMENT>
         
 Allow dynamic-group <NAME OF THE DG FOR BUILD PIPELINE> ons-topics in compartment <NAME OF THE COMPARTMENT>
+
+Allow dynamic-group <NAME OF THE DG FOR BUILD PIPELINE> to use instance-agent-family in compartment <NAME OF THE COMPARTMENT>
         
-Allow dynamic-group <NAME OF THE DG FOR COMPUTE INSTANCES> to use instance-agent-command-execution-family in compartment <NAME OF THE COMPARTMENT>
+Allow dynamic-group <NAME OF THE DG FOR COMPUTE INSTANCES> to use instance-agent-family in compartment <NAME OF THE COMPARTMENT>
         
 Allow dynamic group <NAME OF THE DG FOR COMPUTE INSTANCES> to manage objects in compartment <NAME OF THE COMPARTMENT>
-        
-Allow dynamic-group <NAME OF THE DG FOR COMPUTE INSTANCES> to use instance-agent-command-execution-family in compartment <NAME OF THE COMPARTMENT>
 
 ```
 
