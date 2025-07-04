@@ -10,7 +10,7 @@ env:
   exportedVariables:
     - BUILDRUN_HASH
   variables:
-    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm22-ee-java17"
+    "JAVA_HOME" : "/usr/lib64/graalvm/graalvm-java21"
     # PATH is a reserved variable and cannot be defined as a variable.
     # However, PATH can be changed in a build step and the change is visible in subsequent steps.
 steps:
@@ -24,15 +24,15 @@ steps:
   - type: Command
     name: "Pre-yum repo checks"
     command: |
-      printf "\n\n Contents of graal_spec.yaml file:\n $(cat graal_spec.yaml) \n\n"
+      printf "\n\n Contents of build_spec_verbose.yaml file:\n $(cat build_spec_verbose.yaml) \n\n"
       printf "Contents of /etc/pki/rpm-gpg/:\n $(ls -alh /etc/pki/rpm-gpg/) \n"     
       printf "Contents of /etc/yum.repos.d/:\n $(ls -alh /etc/yum.repos.d/) \n"
       printf "Contents of etc/yum.repos.d/oci-included-ol7.repo file:\n $(cat "etc/yum.repos.d/oci-included-ol7.repo") \n"
-      printf "Output of yum list graalvm22-ee-17* :\n $(yum list graalvm22-ee-17*) \n"
+      printf "Output of yum list graalvm-21* :\n $(yum list graalvm-21*) \n"
   - type: Command
-    name: "Install GraalVM 22.x Native Image for Java17"
+    name: "Install Oracle GraalVM for JDK 21 (Native Image and JDK)"
     command: |
-      yum -y install graalvm22-ee-17-native-image
+      yum -y install graalvm-21-native-image
   - type: Command
     name: "Set PATH Variable"
     command: |
@@ -49,7 +49,7 @@ steps:
       printf "Maven version:\n $(mvn --version) \n"
       echo "Current dir: $(pwd)"
       printf "Current dir contents:\n $(ls -alh)"
-      printf "Output of yum list graalvm22-ee-17* :\n $(yum list graalvm22-ee-17*) \n"
+      printf "Output of yum list graalvm-21* :\n $(yum list graalvm-21*) \n"
   - type: Command
     name: "Build a Jar"
     command: |
